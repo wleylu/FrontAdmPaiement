@@ -1,0 +1,341 @@
+<div class="container police"style="width: 100%;padding-right: 0px;">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; PARAMETRAGES</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div>
+        <p-splitButton class="police" styleClass="police" style="background: #491e06 !important;" label="Parametrages"  [model]="items"></p-splitButton>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p-toast></p-toast>
+    <div class="col-12" *ngIf="show==1">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="police polices">Plafonnement des transactions</h3>
+
+            <div class="form-group">
+              <!-- <label>Nombre</label> -->
+              <div class="row">
+                <div class="col-6">
+                  <form [formGroup]="formPlafond1">
+                    <p-fieldset legend="PARTICULIER">
+                      <div class="row">
+                        <div class="col-6">
+                          <div  style="color: #ee2808;" *ngIf="erreur==1">
+                            Ce Parametrage existe déja
+                          </div>
+                          <div class="mb-3">
+                            <div class="isError" style="color: #ee2808;" *ngIf="isControle('nombreFacture1', 'required')">
+                              Le champs Nombre Maximum Facture est requis
+                            </div>
+                            <label for="nombreFacture1" class="form-label">Nombre Maximum Facture:</label>
+                            <input type="text" class="form-control" id="nombreFacture1" placeholder="Enter Le Nombre Maximum Facture" name="nombreFacture1" formControlName="nombreFacture1"[ngClass]="{'form-control': true, 'isWasValidated': isControle('nombreFacture1', 'required')}">
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="mb-3">
+                            <div class="isError" style="color: #ee2808;" *ngIf="isControle('montantMax1', 'required')">
+                              Le champs Montant Maximum Paiement est requis
+                            </div>
+                            <label for="montantMax1" class="form-label">Montant Maximum Paiement:</label>
+                            <input type="text" class="form-control" id="montantMax1" placeholder="Enter Le Montant Maximum Paiement" name="montantMax1" formControlName="montantMax1"[ngClass]="{'form-control': true, 'isWasValidated': isControle('montantMax1', 'required')}">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2" style="margin-top: 3px;">
+                          <p-button  label="Enregistrer" (click)="postPlafond1()" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+                        </div>
+                        <div class="col-2 offset-6" style="margin-top: 1px;margin-left: 62%;">
+                          <p-button  label="Annuler" (click)="onAnnuler2()" icon="pi pi-times" styleClass="p-button-sm"></p-button>
+                        </div>
+                      </div>
+                    </p-fieldset>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <form [formGroup]="formPlafond2">
+                    <p-fieldset legend="DISTRIBUTEUR">
+                      <div class="row">
+                        <div  style="color: #ee2808;" *ngIf="erreur==0">
+                          Ce Parametrage existe déja
+                        </div>
+                        <div  style="color: #ee2808;" *ngIf="erreur==3">
+                        </div>
+                        <div class="col-6">
+                          <div class="mb-3">
+                            <div class="isError" style="color: #ee2808;" *ngIf="isControles('nombreFacture2', 'required')">
+                              Le champs Nombre Maximum Facture est requis
+                            </div>
+                            <label for="nombreFacture2" class="form-label">Nombre Maximum Facture:</label>
+                            <input type="text" class="form-control" id="nombreFacture2" placeholder="Enter Le Nombre Maximum Facture" name="nombreFacture2" formControlName="nombreFacture2"[ngClass]="{'form-control': true, 'isWasValidated': isControles('nombreFacture2', 'required')}">
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="mb-3">
+                            <div class="isError" style="color: #ee2808;" *ngIf="isControles('montantMax2', 'required')">
+                              Le champs Montant Maximum Paiement est requis
+                            </div>
+                            <label for="montantMax2" class="form-label">Montant Maximum Paiement:</label>
+                            <input type="text" class="form-control" id="montantMax2" placeholder="Enter Le Montant Maximum Paiement" name="montantMax2" formControlName="montantMax2"[ngClass]="{'form-control': true, 'isWasValidated': isControles('montantMax2', 'required')}">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2">
+                          <p-button  label="Enregistrer" (click)="postPlafond2()" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+                        </div>
+                        <div class="col-2 offset-6" style="margin-top: 1px;margin-left: 62%;">
+                          <p-button  label="Annuler" (click)="onAnnuler1()" icon="pi pi-times" styleClass="p-button-sm"></p-button>
+                        </div>
+                      </div>
+                    </p-fieldset>
+                  </form>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-10">
+                  <div class="form-group">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" formControlName="typePlanfond" id="inlineRadio1" [value]="0">
+                      <label class="form-check-label" for="inlineRadio1">Particulier</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" formControlName="typePlanfond" id="inlineRadio2" [value]="1">
+                      <label class="form-check-label" for="inlineRadio2">Distributeur</label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="show==2">
+      <div class="row">
+        <div class="col-12">
+
+          <!-- <div class="row">
+             <p-fieldset legend=" Mode de Confirmation de Paiement">
+
+                   <div class="container">
+                      <div class="row">
+                        <div class="col-md-3 mt-0">
+                          <button style="background: #491e06;" data-toggle="modal" disabled="disabled" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button>
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <table class="table table-hover table-striped table-bordered mt-2" style="width:100%;">
+                          <thead>
+                            <tr>
+                               <th scope="col-md-2" >Code paiement</th>
+                               <th scope="col-md-5">Libelle paiement</th>
+                           </tr>
+                         </thead>
+                         <tbody >
+                           <tr *ngFor= "let row of listModes">
+                             <td class="policerow">{{ row.type}}</td>
+                             <td class="policerow">{{ row.libelle}}</td>
+                           </tr>
+                         </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    </div>
+             </p-fieldset>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-md" role="document">
+                 <div class="modal-content" style="width: 140%;margin-left: -116px;">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Confirmation de paiement</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="formValue" (ngSubmit)="ajoutmodepaiement()">
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-6">
+                           <label for="type" >Code paiement</label>
+                           <input type="text" formControlName="type" id="type" class="form-control">
+                        </div>
+                        <div class="col-6">
+                           <label for="Libelle" >Libelle paiement</label>
+                           <input type="text" formControlName="libelle" id="libelle" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                       <button type="submit" class="btn btn-warning">Ajouter</button>
+                    </div>
+                 </form>
+                 </div>
+               </div>
+             </div>
+          </div> -->
+          <!--
+
+  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5"><br>
+                    <br>
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="assets/newlogo.jpg" class="image"> </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5"> <br>
+
+                    <div class="row px-3 mb-4">  <br>
+                    </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Email Address</h6>
+                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Password</h6>
+                        </label> <input type="password" name="password" placeholder="Enter password">
+                    </div>
+                    <br>
+                     <div class="row px-3 mb-4">
+                  </div>
+                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center" (click)="authentification()" >Login</button> </div>
+                    <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small> </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-blue py-4">
+            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Atlantique busness international </small>
+                <div class="social-contact ml-4 ml-sm-auto">
+                    <span class="fa fa-facebook mr-4 text-sm"></span>
+                    <span class="fa fa-google-plus mr-4 text-sm"></span>
+                    <span class="fa fa-linkedin mr-4 text-sm"></span>
+                    <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="wrapper fadeInDown" style="margin-top:-78px;">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/newlogo.jpg" id="icon" alt="User Icon" />
+      <h3>MODIFICATION DE MOT DE PASSE</h3>
+    </div>
+    <div class=" alert alert-danger" *ngIf="erreur==1">
+        <strong> utilisateur ou mot de passe erronés...</strong>
+
+    </div>
+    <!-- Login Form -->
+    <form [formGroup]="firstConnexionForm"><!--
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+      <input type="password" id="password" class="fadeIn second" name="login" placeholder="password"> <br>
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)="authentification()"> -->
+      <!-- <div class="mb-3">
+          <div class="isError" style="color: #ee2808;" *ngIf="isControle('login', 'required')">
+            Le champs login est requis
+          </div>
+          <label> Login :</label><br>
+          <input type="text" name="login" class="form-control"  [attr.disabled] ="true" formControlName="login" [ngClass]="{'form-control': true, 'isWasValidated': isControle('login', 'required')}" >
+
+      </div> -->
+      <div class="md-5">
+          <div class="isError" style="color: #ee2808;" *ngIf="isControle('password','required')">
+            Le champs Mot de passe est requis
+          </div>
+          <label>  Mot de passe :</label>
+          <input type="password" name="password" class="form-control efactureconnexion" formControlName="password" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password', 'required')}"placeholder="Entrer le mot de passe envoyé par E-mail">
+      </div>
+      <div class="mb-3">
+        <div  style="color: #ee2808;" *ngIf="confirmErreur==2">
+          Le champs Nouveau Mot de passe est requis
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="isControle('password1', 'required')">
+          Le champs Nouveau Mot de passe est requis
+        </div>
+        <label> Nouveau Mot de passe :</label>
+        <input type="password" name="password1" class="form-control efactureconnexion" formControlName="password1" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password1', 'required')}" placeholder="Entrer le nouveau mot de passe">
+      </div>
+      <div class="mb-3">
+        <div class="isError" style="color: #ee2808;" *ngIf="isControle('confirmPassword', 'required')">
+          Le champs Confirmation de Mot de passe est requis
+        </div>
+        <div  style="color: #ee2808;" *ngIf="confirmErreur==1">
+          Mot de passe non identique veuillez saisir le bon mot de passe
+        </div>
+
+        <label> Confirmer Mot de passe :</label>
+        <input type="password" name="confirmPassword" class="form-control efactureconnexion" formControlName="confirmPassword"[ngClass]="{'form-control': true, 'isWasValidated': isControle('confirmPassword', 'required')}" placeholder="Confirmer le nouveau mot de passe">
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="onLoggedin()">
+    </form>
+
+    <!-- Remind Passowrd -->
+<!--       <div id="formFooter">
+      <a class="underlineHover" href="#">Go to the Site</a>
+    </div>
+ -->
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="show==3">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="police">Les facturiers</h3>
+          <form [formGroup]="formFacturier">
+            <div class="form-group">
+              <!-- <label>Nombre</label> -->
+              <div class="row">
+
+              <div class="col-3">
+                <div class="p-inputgroup">
+                  <span style="background: #e67e0a;"  class="p-inputgroup-addon">
+                      <i style="font-size: 17px;color: #fff;" class="fa fa-tachometer"></i>
+                  </span>
+                  <span class="p-float-label">
+                      <input style="
+                      width: 100%;" type="text" id="inputgroup" pInputText [(ngModel)]="value7">
+                      <label for="inputgroup">Nom</label>
+                  </span>
+              </div>
+              </div>
+              <div class="col-2" style="width: 10%;margin-top: -1px;">
+                <div class="col-md-6">
+                  <input type="file" (change)="onFileChanged($event)">
+
+                </div>
+                <div class="col-md-6">
+                    <input type="button" (click)="onUpload()" value="upload">
+                </div>
+              </div>
+                <div class="col-2" style="margin-top: -2px;">
+                  <p-button  label="Enregistrer" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

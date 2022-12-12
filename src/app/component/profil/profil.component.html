@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row" style="margin-top: 35px;">
+    <div class="col">
+      <form >
+        <fieldset style="border: 1px solid #ccc; padding-left: 25px;
+        padding-right: 25px;">
+          <legend style="margin-top:-21px">
+            <span style="background: #fff;">Informations</span>
+          </legend>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="login" [attr.disabled] ="true" class="form-control" placeholder="{{login}}" id="login">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="nom" [attr.disabled] ="true" class="form-control" placeholder="{{nom}}" id="nom">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="prenom">Prénom:</label>
+                <input type="prenom" [attr.disabled] ="true" class="form-control" placeholder="{{prenom}}" id="prenom">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" [attr.disabled] ="true" class="form-control" placeholder="{{email}}" id="email">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 35px;">
+    <div class="col">
+      <form [formGroup]="firstConnexionForm">
+        <fieldset style="border: 1px solid #ccc; padding-left: 25px;
+        padding-right: 25px;">
+          <legend style="margin-top:-21px">
+            <span style="background: #fff;">Modifier Mot de Passe</span>
+          </legend>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <div  style="color: #ee2808; font-size: 10px;" *ngIf="confirmErreur==4">
+                  Mot de passe incorrect
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;" *ngIf="isControle('password','required')">
+                  Le champs Mot de passe est requis
+                </div>
+                <label>  Mot de passe :</label>
+                <input type="password" name="password" class="form-control" formControlName="password" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password', 'required')}"placeholder="Entrer votre ancien mot de passe">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div  style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="confirmErreur==2">
+                  Le champs Nouveau Mot de passe est requis
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="isControle('password1', 'required')">
+                  Le champs Nouveau Mot de passe est requis
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="messageMotPasseFort==1">
+                  Au moins 8 Caractères
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="messageMotPasseFort==2">
+                  Le mot de passe doit contenir au moins une lettre Majuscule
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="messageMotPasseFort==3">
+                  Le mot de passe doit contenir au moins une lettre Miniscule
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="messageMotPasseFort==4">
+                  Le mot de passe doit contenir au moins un chiffre
+                </div>
+                <div class="isError" style="color: #ee2808; font-size: 10px;margin-top: -15px;" *ngIf="messageMotPasseFort==5">
+                  Le mot de passe doit contenir au moins un caractère spécial
+                </div>
+                <div style="color: #ee2808;" *ngIf="confirmErreur==6">
+                  Le mot de passe entré a été utilisé récemment
+              </div>
+                <label> Nouveau Mot de passe :</label>
+                <input type="password" name="password1" (ngModelChange)="onControleValue($event)" class="form-control" formControlName="password1" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password1', 'required')}" placeholder="Entrer le nouveau mot de passe">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="isError" style="color: #ee2808; font-size: 10px;" *ngIf="isControle('confirmPassword', 'required')">
+                  Le champs Confirmation de Mot de passe est requis
+                </div>
+                <div  style="color: #ee2808; font-size: 10px;" *ngIf="confirmErreur==1">
+                  Mot de passe non identique veuillez saisir le bon mot de passe
+                </div>
+
+                <label> Confirmer Mot de passe :</label>
+                <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword"[ngClass]="{'form-control': true, 'isWasValidated': isControle('confirmPassword', 'required')}" placeholder="Confirmer le nouveau mot de passe">
+              </div>
+            </div>
+            <div class="col" style="padding-top: 40px;">
+              <div class="form-group">
+                <p-button style="margin-right: 5px;"  label="Valider" (click)="test()" icon="pi pi-check" styleClass="p-button-sm" ></p-button>
+
+
+
+                <!-- <p-button style="margin-right: 5px;"  label="Valider" (click)="onLoggedin()" icon="pi pi-check" styleClass="p-button-sm" ></p-button> -->
+                <p-button  label="Annuler" (click)="onAnnuler()" class="buttonClass" icon="pi pi-times" styleClass="p-button-sm"></p-button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

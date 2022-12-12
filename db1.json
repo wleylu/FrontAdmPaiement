@@ -1,0 +1,416 @@
+{
+
+"signaletique": [
+{
+  "id":"14410011",
+  "client": "14000009",
+  "nom": "OKPSARL",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "oksarl@banqueatlantique.net",
+  "comptes": [
+        {
+          "compte": "140000060018",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+        "compte": "140000060019",
+        "agence": "141010010",
+        "ncg": "10022",
+        "libNcg": "CC PERSONNEL BA DZ",
+        "coddci": "43",
+        "expl": "ZSAFIA1"
+    }
+  ]
+},
+{
+  "id":"14410012",
+  "client": "14000010",
+  "sexe": "FEMALE",
+  "nomPrenom": "KOUAME",
+  "nom": "BAKA EPSE DIlO",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni1@banqueatlantique.net",
+  "comptes": [
+        {
+          "compte": "140000060020",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+        "compte": "140000060021",
+        "agence": "141010010",
+        "ncg": "10022",
+        "libNcg": "CC PERSONNEL BA DZ",
+        "coddci": "43",
+        "expl": "ZSAFIA1"
+    }
+  ]
+},
+{
+  "id":"14410013",
+  "client": "14000011",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni@banqueatlantique.net",
+  "comptes": [
+      {
+          "compte": "140000060018",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060026",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060034",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+{
+
+  "client": "14410014",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni@banqueatlantique.net",
+  "comptes": [
+      {
+          "compte": "140000060019",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060027",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060035",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+
+{
+  "id":"14410015",
+  "client": "14000013",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni@banqueatlantique.net",
+  "comptes": [
+      {
+          "compte": "140000060050",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060029",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060036",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+
+{
+  "id":"14410016",
+  "client": "14000014",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni@banqueatlantique.net",
+  "comptes": [
+      {
+          "compte": "140000060050",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060029",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060036",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+{
+  "id":"14000016",
+  "client": "14000016",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaise.okaingni@banqueatlantique.net",
+  "comptes": [
+      {
+          "compte": "14000006007",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "14000006009",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "14000006006",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+{
+  "id":"14000015",
+  "client": "14000015",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKA EPSE DILO",
+  "nom": "BAKA",
+  "prenom": "LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "11107772152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "nicaiseokaingni@gmail.com",
+  "comptes": [
+      {
+          "compte": "140000060051",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060052",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060053",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+{
+  "client": "14000006",
+  "sexe": "FEMALE",
+  "nomPrenom": "BAKAYOKO EPSE DIALLO",
+  "nom": "BAKAYOKO EPSE DIALLO",
+  "prenom": "MAIMOUNA LEILA",
+  "dateNais": "19841216",
+  "agec": "7100",
+  "tel": "49494161",
+  "pieceId": "111037502152T",
+  "dateExpir": "",
+  "dateDeLivr": "",
+  "email": "MAIMOUNABAK@YAHOO.FR",
+  "comptes": [
+      {
+          "compte": "140000060018",
+          "agence": "141010010",
+          "ncg": "1002",
+          "libNcg": "CC PERSONNEL BA",
+          "coddci": "42",
+          "expl": "ZSAFIA"
+      },
+      {
+          "compte": "140000060026",
+          "agence": "141010010",
+          "ncg": "3501",
+          "libNcg": "CDL DOUT-GE",
+          "coddci": "",
+          "expl": "INPUTTER"
+      },
+      {
+          "compte": "140000060034",
+          "agence": "141010010",
+          "ncg": "8002",
+          "libNcg": "PROVISIONS S/CONTENTIEUX",
+          "coddci": "",
+          "expl": "INPUTTER"
+      }
+  ]
+},
+{
+  "id": "14244700",
+  "client": "14244700",
+  "sexe": "FEMALE",
+  "nomPrenom": "BALLO KAMAHA SALIMATA",
+  "nom": "Melle BALLO KAMAHA SALIMATA",
+  "prenom": "",
+  "dateNais": "19921104",
+  "agec": "7000",
+  "tel": "22577655330",
+  "pieceId": "C0106146985",
+  "dateExpir": "20250309",
+  "dateDeLivr": "20150310",
+  "email": "ballosalima@gmail.com",
+  "comptes": [
+    {
+      "compte": "141447000019",
+      "agence": "141020013",
+      "ncg": "1001",
+      "libNcg": "CAV Particulier Locaux",
+      "coddci": "",
+      "expl": "CI.70993"
+    }
+  ]
+},
+{
+  "id":"14502858",
+	"client":"14502858",
+	"sexe":"MALE",
+	"nomPrenom":"KRA KOUAKOU CEDRIC LIONEL",
+	"nom":"Mr KRA KOUAKOU CEDRIC LIONEL",
+	"prenom":"",
+	"dateNais":"19901016",
+	"agec":"7100",
+	"tel":"03830708",
+	"pieceId":"C0031498366",
+	"dateExpir":"20190624",
+	"dateDeLivr":"20090624",
+	"email":"",
+	"comptes":[
+		{
+			"compte":"145028580019",
+			"agence":"141020011",
+			"ncg":"1002",
+			"libNcg":"CC PERSONNEL BA",
+			"coddci":"",
+			"expl":"CI.70674"
+		},
+		{"compte":"145028580027",
+		"agence":"141020011",
+		"ncg":"6001",
+		"libNcg":"Compte Epargne",
+		"coddci":"",
+		"expl":"CI.70674"
+		}
+
+	]
+	}
+
+]
+
+
+}

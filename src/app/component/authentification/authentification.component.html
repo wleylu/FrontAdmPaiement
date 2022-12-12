@@ -1,0 +1,115 @@
+<!--
+
+  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5"><br>
+                    <br>
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="assets/newlogo.jpg" class="image"> </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5"> <br>
+
+                    <div class="row px-3 mb-4">  <br>
+                    </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Email Address</h6>
+                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Password</h6>
+                        </label> <input type="password" name="password" placeholder="Enter password">
+                    </div>
+                    <br>
+                     <div class="row px-3 mb-4">
+                  </div>
+                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center" (click)="authentification()" >Login</button> </div>
+                    <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small> </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-blue py-4">
+            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Atlantique busness international </small>
+                <div class="social-contact ml-4 ml-sm-auto">
+                    <span class="fa fa-facebook mr-4 text-sm"></span>
+                    <span class="fa fa-google-plus mr-4 text-sm"></span>
+                    <span class="fa fa-linkedin mr-4 text-sm"></span>
+                    <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/newlogo.jpg" id="icon" alt="User Icon" />
+      <h1>E-FACTURE</h1>
+    </div>
+    <div class=" alert alert-danger" *ngIf="erreur==1">
+        <strong> utilisateur ou mot de passe erronés...</strong>
+
+    </div>
+    <div class=" alert alert-danger" *ngIf="erreur==99">
+      <strong> Serveur injoignable, prière contacter l'administrateur</strong>
+
+  </div>
+    <!-- Login Form -->
+    <form [formGroup]="formValue"><!--
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+      <input type="password" id="password" class="fadeIn second" name="login" placeholder="password"> <br>
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)="authentification()"> -->
+      <span class="isError" style="color: #ee2808;" *ngIf="erreurPrestataire">Désolé! Compte non autorisé.</span>
+      <span class="isError" style="color: #ee2808;" *ngIf="noagence==1">Agence non renseignée</span>
+      <span class="isError" style="color: #ee2808;" *ngIf="erreurAuth==1">Votre login ou mot de passe incorrect</span>
+      <span class="isError" style="color: #ee2808;" *ngIf="erreurAuth==2">Votre compte est restriction veuillez contacter l'administrateur</span>
+      <span  style="color: #fff;" *ngIf="erreurAuth==3"></span>
+      <div class="mb-3">
+          <label> Utilisateur :</label>
+          <input type="text" name="username" class="form-control" formControlName="login" placeholder="Entrer votre login">
+      </div>
+      <div class="md-5">
+          <label>  Mot de passe : </label>
+<!--             <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example"> -->
+          <input style="background-color: #f6f6f6;color: #0d0d0d;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 5px;width: 85%;border: 2px solid #f6f6f6;transition: all .5s ease-in-out;border-radius: 5px 5px 5px 5px;" type="password" name="password1" class="form-control" formControlName="password1" placeholder="Entrer votre mot de passe">
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="onLoggedin()"><br>
+      <!-- <a style="color: #ee2808;margin-bottom: 25px; cursor: pointer;" (click)="onPwdForGot()" class="isError">Mot de passe oublié</a> -->
+    </form>
+
+    <!-- Remind Passowrd -->
+<!--       <div id="formFooter">
+      <a class="underlineHover" href="#">Go to the Site</a>
+    </div>
+ -->
+  </div>
+</div>
+<p-dialog header="Mot de passe Oublié" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '30vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <form [formGroup]="formPwdForGot">
+     <div class="container">
+      <div class="row">
+       <div class="col">
+        <div class="field col-12 md:col-4">
+        <span *ngIf="mailExist==1" style="color: #ee2808;"> Cet mail existe pas</span>
+          <span class="p-float-label">
+              <input style="width: 100%;" type="text" id="email" pInputText formControlName="email">
+              <label for="email">Entrer votre E-mail</label>
+          </span>
+      </div>
+       </div>
+      </div>
+     </div>
+
+    </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="onSendMail()" label="Valider" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="displayMaximizable=false" label="Annuler"></p-button>
+        </ng-template>
+</p-dialog>

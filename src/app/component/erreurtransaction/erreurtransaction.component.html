@@ -1,0 +1,108 @@
+<div class="container police"style="width: 101%;padding-right: 0px;">
+  <div class="row">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; ERREUR GENERER </li>
+          </ol>
+        </nav>
+  </div>
+  <div class="container">
+    <form >
+      <div class="row">
+        <!-- <div class="col-md-1  mt-1"> -->
+          <!-- <button style="background: #491e06;"  type="button" (click)="clickAddcompteuser()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button> -->
+        <!-- </div> -->
+        <div class="col-12">
+          <div class="row">
+            <div class="col">
+
+              <label for="firstDate">Date Début </label>
+              <input name="firstDate"  [(ngModel)]="firstDate"   id="firstDate"  class="form-control search"    type="date"  placeholder="Entrer la prémiere Date">
+              <div class="isError" style="color: red;" *ngIf="remplir === 1">
+                Le champs est requis
+              </div>
+            </div>
+            <div class="col">
+
+              <label for="lastDate">Date Fin </label>
+              <input name="lastDate"   [(ngModel)]="lastDate"  id="lastDate"  class="form-control search" type="date"  placeholder="Entrer la second Date">
+              <div class="isError" style="color: red;" *ngIf="remplir === 1">
+                Le champs est requis
+              </div>
+            </div>
+            <div class="col">
+              <label for="login">Login</label>
+              <input name="login"  [(ngModel)]="login"  id="login" class="form-control search"    type="text"  placeholder="Veuillez rechercher par login">
+            </div>
+            <!-- <div class="col">
+              <label for="methode">Méthode</label>
+              <input name="methode"   formControlName="methode"  id="methode" class="form-control search" type="text"  placeholder="Veuillez rechercher par methode">
+            </div> -->
+            <div class="col-1" style="padding-top: 38px;">
+              <button style="width: 100%;"  class="btn btn-warning"  (click)="Search()" ><i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="col-1" style="padding-top: 38px;">
+              <button style="width: 100%;" (click)="annuler();"class="btn btn-secondary"><i class="fa fa-repeat" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+    <!-- <table style="font-size: 14px" class="table table-striped table-bordered table-responsive mt-2 ">
+      <thead>
+         <tr style="text-align: left !important;">
+
+            <th scope="col" style="width: 10%;"> Date Erreur </th>
+            <th scope="col" style="width: 12%;"> Http Status Code </th>
+            <th scope="col"> Methode</th>
+            <th scope="col"> Login</th>
+            <th scope="col"> Description</th>
+            <th style="width: 30%;text-align: left !important;" scope="col"> Message</th>
+         </tr>
+      </thead>
+
+      <tbody >
+
+        <tr class="policerow" *ngFor= "let row of erreurData | paginate: {itemsPerPage:4,currentPage:p};">
+
+          <td scope="row" style="text-align: left;"  class="policerow">{{ row.dateErreur}}</td>
+          <td style="text-align: left;" class="policerow">{{ row.httpStatusCode}}</td>
+          <td style="text-align: left;" class="policerow">{{ row.methode}}</td>
+          <td style="text-align: left;" class="policerow">{{ row.login}}</td>
+          <td style="text-align: left;" class="policerow">{{ row.description}}</td>
+          <td style="text-align: left;"  class="policerow">{{ row.message}}</td>
+        </tr>
+
+      </tbody>
+      </table>
+
+  <pagination-controls (pageChange) = "p = $event"></pagination-controls> -->
+
+  <div class="card">
+      <p-table [value]="erreurData" styleClass="p-datatable-striped p-datatable-sm" [rows]="4" [paginator]="true" [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th> Date Erreur</th>
+                  <th>Http Status Code</th>
+                  <th>Methode</th>
+                  <th>Login</th>
+                  <th>Description</th>
+                  <th>Message</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row>
+              <tr>
+                  <td>{{row.dateErreur}}</td>
+                  <td>{{row.httpStatusCode}}</td>
+                  <td>{{row.methode}}</td>
+                  <td>{{row.login}}</td>
+                  <td>{{row.description}}</td>
+                  <td>{{row.message}}</td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </div>
+</div>

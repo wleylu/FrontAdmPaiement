@@ -1,0 +1,106 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.border {
+    padding: 10px;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.fa {
+    margin-right: 10px;
+}
+
+.container {
+    margin-top: 10px;
+}
+.container2 {
+  margin-top: 10px;
+}
+
+table .btn {
+    margin: 2px;
+}
+
+.mybtn {
+    color: #ffa000 !important;
+    border-color: #ffa000 !important;
+}
+
+.mybtn:hover {
+    color: white !important;
+    border-color: #ffa000 !important;
+    background-color: #ffa000;
+    -webkit-box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 30px -5px rgba(0, 0, 0, 0.2);
+}
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.body-main {
+  background: #ffffff;
+  /* border-bottom: 9px solid #1E1F23; */
+  /* border-top: 9px solid #1E1F23; */
+  margin-top: 10px;
+  margin-bottom: 2px;
+  padding: 40px 30px !important;
+  position: relative;
+  box-shadow: 0 1px 21px #808080;
+  font-size: 10px
+}
+
+.main thead {
+  background: #1E1F23;
+  color: #fff
+}
+
+.img {
+  height: 100px
+}
+
+h1 {
+  text-align: center
+}
+

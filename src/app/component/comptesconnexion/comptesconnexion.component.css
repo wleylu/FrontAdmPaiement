@@ -1,0 +1,7 @@
+.isWasValidated {
+    border-color: #dc3545;
+}
+
+.isError{
+    color: #dc3545;
+}

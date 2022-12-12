@@ -1,0 +1,158 @@
+<div class="container police" style="width: 101%;padding-right: 0px;">
+    <div class="row">
+        <nav aria-label="breadcrumb" class="enteteMain">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active enteteMainLi text-light text-xl" aria-current="page">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; VALIDATION DES SAISIES</li>
+            </ol>
+        </nav>
+
+
+        <div class="card shadow m-1 mt-1">
+          <div class="card-body">
+
+            <table style="font-size: 14px" class="table table-hover table-striped table-bordered mt-2 ">
+                <thead>
+                    <tr class="tableHeader">
+                        <!-- <th scope="col" > Id </th> -->
+                        <th scope="col"> Réfenrence </th>
+                        <th scope="col"> Nom</th>
+                        <th scope="col"> Prenom</th>
+                        <th scope="col"> N° Pièce </th>
+                        <th scope="col"> Email</th>
+                        <th scope="col"> Statut</th>
+                        <th scope="col"> Validation</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr class="policerow" *ngFor="let row of compteuserData | paginate: {itemsPerPage:10,currentPage:p};">
+                        <!--  <td>{{ row.id}}</td> -->
+                        <td class="policerow">{{ row.client}}</td>
+                        <td class="policerow">{{ row.nom}}</td>
+                        <td class="policerow">{{ row.prenom}}</td>
+                        <td class="policerow">{{ row.pieceId}}</td>
+                        <td class="policerow">{{ row.email}}</td>
+                        <td class="policerow">
+                            <div class="row">
+                                <!-- <div class="col-4">
+                      <button class="btn btn-info" (click)="onEdit(row)"  type="button"  data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </button>
+                    </div> -->
+                                <div class="col-12">
+                                    <span *ngIf="!row.status" class="btn" style="width: 100%;cursor: auto;background: none;border: none;"><i style="color: #de3c3cb8;
+                        " class="fa fa-window-close-o" aria-hidden="true"></i>
+                      </span>
+                                    <span *ngIf="row.status" class="btn" style="width: 100%;cursor: auto;background: none;border: none;"><i    class="fa fa-check-square-o" aria-hidden="true" style="color:#2c940a;"></i>
+                      </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="policerow">
+                            <div class="row">
+                                <!-- <div class="col-4">
+                      <button class="btn btn-outline-info" (click)="onEdit(row)"  type="button"  data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </button>
+                    </div> -->
+                                <div class="col-12">
+                                    <!--              <button *ngIf="row.habilitation =='ROLE_USER_PERSO'" (click)="onEdit(row)" class="btn  btn-warning" data-toggle="modal" data-target="#exampleModal" style="width: 100%;cursor: pointer;background: none;border: none;"><i style="color: #e97a00;
+                        " class="fa fa-check" aria-hidden="true"></i>
+                      </button> -->
+                                    <button *ngIf="row.habilitation !='ROLE_USER_PERSO'" (click)="onEdit(row)" class="btn  btn-warning" data-toggle="modal" data-target="#exampleModal" style="width: 100%;cursor: pointer;background: none;border: none;"><i style="color: #e97a00;
+                        " class="fa fa-check" aria-hidden="true"></i>
+                      </button>
+                                    <!-- <button  *ngIf= "!row.validation" (click)="onvalide(row)"   class="btn  btn-danger" style="width: 100%;"><i class="fa fa-toggle-on" aria-hidden="true"></i>
+                      </button>
+                      <button  *ngIf= "row.validation" (click)="onInValide(row)"   class="btn btn-success" style="width: 100%;"><i class="fa fa-toggle-off" aria-hidden="true"></i></button> -->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+            <div class="tablePaginate">
+              <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
+              </div>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header modalHeader">
+                            <h3 class="modal-title modalTitle text-xl" id="exampleModalLabel">Informations bénéficiaire : {{ comptemarchandObj.client }}</h3>
+                            <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"style="color: #f0a249;font-size: 25px;font-weight: bold;">&times;</span>
+              </button>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <form [formGroup]="formValue">
+                                <div class="row">
+
+                                    <div class="col">
+                                        <label for="pieceId"> N° Pièce </label>
+                                        <input type="text" [attr.disabled]="true" formControlName="pieceId" id="pieceId" class="form-control">
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="email"> Email </label>
+                                        <input type="text" [attr.disabled]="true" formControlName="email" id="email" class="form-control">
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="nom">Nom</label>
+                                        <input type="text" [attr.disabled]="true" formControlName="nom" id="nom" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('client', 'required') || isControle('client', 'minlength')}">
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="Prenom">Prénoms</label>
+                                        <input type="text" [attr.disabled]="true" formControlName="prenom" id="prenom" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="tel3">Contact </label>
+                                        <input type="text" [attr.disabled]="true" id="tel3" formControlName="tel" class="form-control">
+                                    </div>
+
+
+                                    <div class="col-3">
+                                        <label for="montant"> Montant</label>
+                                        <input type="text" [attr.disabled]="true" id="montant" formControlName="montant" class="form-control">
+                                    </div>
+
+
+                                    <div class="col">
+                                        <label for="adresse"> Ville</label>
+                                        <input type="text" [attr.disabled]="true" id="adresse" formControlName="adCm" class="form-control">
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer align-center modalFooter">
+
+
+                            <button type="button" id="closebutton" (click)="onvalide(clientUser)" class="btn btn-warning mr-20" style="width: 15%;margin-right: 40%;"> Valider </button>
+
+                            <!--   <button  type="button" *ngIf= "showAdd" (click)="getsignal()" class="btn btn-outline-warning"> rechercher </button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>

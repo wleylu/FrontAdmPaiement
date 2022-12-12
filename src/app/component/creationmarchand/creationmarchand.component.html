@@ -1,0 +1,164 @@
+<div class="container">
+  <form>
+    <div class="row">
+      <div class="col-md-1  mt-1">
+        <button style="background: #491e06;"  type="button" (click)="clickAddcompteuser()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button>
+      </div>
+      <div class="col-md-11">
+        <div class="row">
+          <div class="col-md-5">
+            <input name="insertuser"  formControlName="insertuser"  id="insertuser" class="form-control search"    type="text"  placeholder="Veuillez rechercher par nom">
+          </div>
+          <div class="col-md-5">
+            <input name="searchLoginuser"   formControlName="searchLoginuser" id="searchLoginuser" class="form-control search" type="text"  placeholder="Veuillez rechercher par login">
+          </div>
+          <div class="col-md-1" >
+            <button  class="btn btn-outline-info mx-3 abiButton" >Rechercher</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<p-toast></p-toast>
+<table style="font-size: 14px" class="table table-hover  table-bordered mt-2 ">
+      <thead>
+         <tr>
+            <!-- <th scope="col" > Id </th> -->
+            <th  scope="col" > login </th>
+            <th scope="col"> Nom</th>
+            <th scope="col"> Prenom</th>
+            <th scope="col"> Roles </th>
+            <th scope="col"> email</th>
+            <th scope="col"> Statut</th>
+            <th scope="col"> Action</th>
+         </tr>
+      </thead>
+
+      <tbody >
+
+        <tr class="policerow" *ngFor= "let row of backOfficeData">
+         <!--  <td>{{ row.id}}</td> -->
+          <td class="policerow">{{ row.login}}</td>
+          <td class="policerow">{{ row.nom}}</td>
+          <td class="policerow">{{ row.prenom}}</td>
+          <td class="policerow">{{ row.habilitation}}</td>
+          <td class="policerow">{{ row.email}}</td>
+          <td class="policerow" *ngIf= "row.status"> Actif </td>
+          <td class="policerow" *ngIf= "!row.status"> Inactif </td>
+          <td class="policerow">
+            <button class="btn" (click)="onModifBackoffice(row)"  type="button"  data-toggle="modal" data-target="#exampleModal" ><i style="color: #ffc107;font-size: 20px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+            <button  (click)="onEditBackoffice(row)" data-toggle="modal" data-target="#exampleModal" class="btn mx-3"><i class="fa fa-file-text" style="color: #491e06;font-size: 20px;" aria-hidden="true"></i></button>
+            <!-- <button  (click)="confirmDelate(content,row)"  class="btn btn-outline-danger mx-3"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+            <!--button  (click)="deletedcomptemarchant(row)"  class="btn btn-outline-danger mx-3">Deleted</button-->
+          </td>
+        </tr>
+
+      </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" style="width: 140%;margin-left: -116px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="
+        text-align: center;font-size: 20px;font-weight: bold; margin-left: 35%;color: #f2a54e;" id="exampleModalLabel" *ngIf= "showAdd==1">Création de l'utilisateur</h3>
+        <h3 class="modal-title" style="
+        text-align: center;font-size: 20px;font-weight: bold; margin-left: 35%;color: #f2a54e;" id="exampleModalLabel" *ngIf= "showAdd==0">Modification de l'utilisateur</h3>
+        <h3 class="modal-title" style="
+        text-align: center;font-size: 20px;font-weight: bold; margin-left: 30%;color: #f2a54e;" id="exampleModalLabel" *ngIf= "showAdd==3">Details de l'utilisateur</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="color: #f0a249;font-size: 25px;font-weight: bold;" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <form [formGroup]="formValueBack">
+          <div class="row">
+            <div class="col-6 form-group" *ngIf="disableModif==2">
+              <label  for="backlogin">Login</label>
+              <input type="text" id="backlogin"  [attr.disabled] ="isDisable ? '' : null" class="form-control"   name="backlogin" formControlName="backlogin">
+            </div>
+            <div class="col-6 form-group" *ngIf="disableModif==1">
+              <label  for="backlogin">Login</label>
+              <input type="text" id="backlogin"   [attr.disabled] ="true ? '' : null" class="form-control"   name="backlogin" formControlName="backlogin">
+            </div>
+            <div class="col-6 form-group" *ngIf="disableModif==3">
+              <label  for="backlogin">Login</label>
+              <input type="text" id="backlogin"   [attr.disabled] ="isDisable ? '' : null" class="form-control"   name="backlogin" formControlName="backlogin">
+            </div>
+            <div class="form-group col-6 dropdown">
+              <label for="backhabilitation"> Roles</label>
+              <select [attr.disabled] ="isDisable ? '' : null" class="form-control" formControlName="backhabilitation" >
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_USER_PERSO">ROLE_USER_PERSO</option>
+                <option value="ROLE_AUDIT" >ROLE_AUDIT</option>
+                <option value="ROLE_USER_COM">ROLE_USER_COM</option>
+                <option value="ROLE_HELPDESK">ROLE_HELPDESK</option>
+                <option value="ROLE_MONETIQUE">ROLE_MONETIQUE</option>
+                <option value="ROLE_COMPTABILITE">ROLE_COMPTABILITE</option>
+                <option value="ROLE_SUPPORT">ROLE_SUPPORT</option>
+                <!-- <option value="ROLE_PRESTATAIRE">ROLE_PRESTATAIRE</option> -->
+                <option value="ROLE_USER">ROLE_USER</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="backnom" >Nom</label>
+              <input type="text" [attr.disabled] ="isDisable ? '' : null" formControlName="backnom" id="backnom" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="backprenom" >Prénom</label>
+              <input type="text" [attr.disabled] ="isDisable ? '' : null" formControlName="backprenom" id="backprenom" class="form-control">
+            </div>
+          <!-- <div class="col-sm-4">
+            <label for="datecréation" > Date création </label>
+            <input type="date" formControlName="datecreation" id="datecreation" class="form-control">
+          </div> -->
+
+
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="backtel" >Telephone </label>
+            <input type="text" [attr.disabled] ="isDisable ? '' : null" id="backtel" formControlName="backtel" class="form-control">
+          </div>
+
+          <!-- <div class="col-sm-2">
+            <label  for="password">Password</label>
+              <input type="password" [attr.disabled] ="isDisable ? '' : null" formControlName="password" id="password"class="form-control">
+           </div> -->
+
+
+
+          <div class="col-6">
+            <label  for="backEmail">Email </label>
+            <input  type="text" id="backemail" [attr.disabled] ="isDisable ? '' : null" formControlName="backemail" class="form-control">
+          </div>
+        </div>
+
+        <div class="row" *ngIf= "showAdd==0">
+          <div class="form-group col-6">
+            <label for="backstatut">Statut </label>
+            <select [attr.disabled] ="isDisable ? '' : null" class="form-control" formControlName="backstatut" >
+              <option value="1">Actif</option>
+              <option value="0">inactif</option>
+            </select>
+          </div>
+        </div>
+
+
+      </form>
+      </div>
+         <div class="modal-footer">
+           <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" *ngIf= "showAdd==3" (click)="ajoutBackoffice()" class="btn btn-warning">Ajouter</button>
+        <button  type="button" *ngIf= "showAdd==0" (click)="updateBackOffice()" class="btn btn-warning"> Modifier </button>
+
+        </div>
+      </div>
+      </div>
+</div>

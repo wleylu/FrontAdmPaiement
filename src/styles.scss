@@ -1,0 +1,426 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$plateformeBI-primary: mat-palette($mat-indigo);
+$plateformeBI-accent: mat-palette($mat-pink, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$plateformeBI-warn: mat-palette($mat-red);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$plateformeBI-theme: mat-light-theme(( color: ( primary: $plateformeBI-primary, accent: $plateformeBI-accent, warn: $plateformeBI-warn, )));
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($plateformeBI-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+
+/* Importing Bootstrap SCSS file. */
+
+@import '~bootstrap/scss/bootstrap';
+
+/* Importing Bootstrap SCSS file. */
+
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/dist/css/bootstrap.css";
+// @import "~font-awesome/css/font-awesome.css";
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding-right: 0px !important;
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+/* Importing Bootstrap SCSS file. */
+
+@import '~bootstrap/scss/bootstrap';
+@import "primeflex/primeflex.css";
+.buttonClass button.p-ripple.p-element.p-button-sm.p-button.p-component {
+    background: #000;
+}
+
+.abiButton {
+    background-color: #ffffff !important;
+    color: #491e06 !important;
+    border-color: #491e06 !important;
+    font-weight: bold !important;
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    font-variant-caps: normal !important;
+}
+
+.sidebar .nano-content>ul li>a {
+    display: block;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px;
+    line-height: 30px;
+    border-bottom: none;
+    background: #c2c5c8;
+    text-decoration: none;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    position: relative;
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    font-size: 15px;
+    font-weight: bold;
+    font-variant-caps: revert !important;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background: #c2c5c8;
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    font-variant-caps: revert !important;
+    font-size: 15px;
+    font-weight: bold;
+    z-index: 100;
+    overflow: auto;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    box-shadow: 0 5px 20px #00000080;
+}
+
+.sidebar .nano-content>ul li>a:hover {
+    background: #fff;
+    color: #e87a00 !important;
+    border-bottom: 1px solid #f17400;
+}
+
+.sidebar .nano-content>ul li>a:active {
+    background: #fff !important;
+    color: #e87a00 !important;
+    border-bottom: 1px solid #f17400 !important;
+}
+
+// .sidebar .nano-content>ul li>a:focus {
+//   background: #fff;
+//   color: #e87a00 !important;
+//   border-bottom: 1px solid #f17400;
+// }
+// .sidebar .nano-content>ul li>a:focus-visible {
+//   background: #fff;
+//   color: #e87a00 !important;
+//   border-bottom: 1px solid #f17400;
+// }
+//  .sidebar .nano-content>ul li>a:focus-within {
+//    background: #fff;
+//    color: #e87a00 !important;
+//    border-bottom: 1px solid #f17400;
+//  }
+.abiActive {
+    background: #fff !important;
+    color: #105a9b !important;
+    border-bottom: 1px solid #FFF !important;
+    text-decoration: none !important;
+}
+
+.abiActive:hover {
+    background: #fff !important;
+    color: #105a9b !important;
+    border-bottom: 1px solid #FFF !important;
+    text-decoration: none !important;
+}
+
+.colormenuabi {
+    color: #fff;
+    text-decoration: none !important;
+}
+
+.colormenuabi:hover {
+    color: #fff
+}
+
+// .sidebar .nano-content>ul li>a:target {
+//   background: #fff;
+//   color: #e87a00 !important;
+//   border-bottom: 1px solid #f17400;
+// }
+// .sidebar .nano-content>ul li>a:visited {
+//   background: #fff;
+//   color: #e87a00 !important;
+//   border-bottom: 1px solid #f17400;
+// }
+.police {
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.polices {
+    text-align: center;
+    font-size: 30px !important;
+    color: #686565;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
+.policerow {
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    color: #491e06;
+}
+
+.policerowcompte {
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    color: #491e06;
+    font-size: 12px;
+}
+
+.search::placeholder {
+    font-size: 0.80rem;
+    color: #aaa;
+    font-style: italic;
+    font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.p-multiselect:not(.p-disabled):hover {
+    border-color: #aacdfe;
+    width: 100%;
+}
+
+.p-multiselect {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+}
+
+.efactureconnexion {
+    background-color: #f6f6f6 !important;
+    color: #0d0d0d !important;
+    padding: 15px 32px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    margin: 5px !important;
+    width: 85% !important;
+    border: 2px solid #f6f6f6 !important;
+    transition: all .5s ease-in-out !important;
+    border-radius: 5px 5px 5px 5px !important;
+}
+
+p-button.p-element>button {
+    background: #e68a25;
+}
+
+p-button.p-element>button:hover {
+    background: #e68a25 !important;
+}
+
+button.p-element.p-splitbutton-defaultbutton.p-button.p-component {
+    background: #e68a25 !important;
+    border-color: #e68a25;
+}
+
+.p-button.p-button-icon-only {
+    width: 2.357rem;
+    padding: 0.5rem 0;
+    background: #e68a25;
+    border-color: #e68a25;
+}
+
+.p-button.p-button-icon-only:hover {
+    width: 2.357rem;
+    padding: 0.5rem 0;
+    background: #e68a25 !important;
+    border-color: #e68a25 !important;
+}
+
+:host ::ng-deep .tabview-custom {
+    i,
+    span {
+        vertical-align: middle;
+    }
+    span {
+        margin: 0 .5rem;
+    }
+}
+
+ :host ::ng-deep .p-button {
+    margin-right: .25rem;
+}
+
+ :host ::ng-deep .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+    color: #f2a751;
+}
+
+
+/* Importing Bootstrap SCSS file. */
+
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.myBtnValider1{
+  background: #02121f5c !important;
+  color: #fff !important;
+  border: 1px solid !important;
+}
+
+.myBtnValider{
+  background: #fefefe !important;
+  color: #105a9b !important;
+  border: 1px solid #fefefe !important;
+}
+
+.myBtnValider:hover{
+  background: #02121f5c !important;
+  color: #fff !important;
+  border: 1px solid #fefefe !important;
+}
+
+.myBtnValiderAN{
+  background: #fefefe !important;
+  color: #105a9b !important;
+  border: 1px solid #105a9b !important;
+}
+.myBtnValiderAN:hover{
+  background: #105a9b !important;
+  color: #fff !important;
+  border: 1px solid #fefefe !important;
+}
+a.ng-star-inserted {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+.ngx-pagination a:hover, .ngx-pagination button:hover {
+  background: #2092de !important;
+}
+.custom-pagination .page-number {
+  display: inline-block !important;
+  /* padding: 5px 12px !important; */
+  background: #afffe6 !important;
+  margin: 0px 4px !important;
+  border-radius: 25px !important;
+}
+
+.page-number.current {
+  background: #ffffff!important;
+  border: 2px solid #458873 !important;
+}
+
+.page-number span {
+  display: block !important;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+}
+
+.pagination-previous,
+.pagination-next {
+  display: inline-block !important;
+  font-weight: bold !important;
+}
+
+.enteteMain {
+  background: #105a9b !important;
+  margin-left: 4px !important;
+}
+
+.enteteMainLi {
+  margin-top: 13px !important;
+  margin-top: 13px !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  margin-left: -30px !important;
+}
+
+.searchPaie {
+  border: 1px solid #ccc !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  margin-left: 4px !important;
+  background: #ffff !important;
+}
+
+.tableHeader {
+  background: #105a9b !important;
+  color: #fff !important;
+}
+
+.tablePaginate {
+  text-align: center !important;
+  background: #105a9b !important;
+  padding-top: 7px !important;
+  padding-bottom: 0px !important;
+  height: 40px !important;
+}
+
+.modalHeader {
+  background: #105a9b !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+.modalTitle {
+  text-align: center !important;
+  font-size: 16px !important;
+  color: #fff !important;
+}
+
+.closeButton {
+  color: #f0a249 !important;
+  font-size: 25px !important;
+  font-weight: bold !important;
+}
+
+.modalFooter {
+  padding-top: 3px !important;
+  padding-bottom: 4px !important;
+  background: #105a9b !important;
+}
+
+.formButton {
+  background: #f2a54e !important;
+  border: none !important;
+}
+
+.formboutons {
+  color: #0f5695 !important;
+  background-color: none !important;
+  border-color: #0f5695 !important;
+}
+
+.formboutons:hover {
+  color: var(--bs-btn-hover-color) !important;
+  background-color: #0f5490 !important;
+  border-color: #0f5695 !important;
+}
+.myMenu{
+  background: #fff !important;
+  box-shadow: 0px 1px 5px 1px #ccc !important;
+}

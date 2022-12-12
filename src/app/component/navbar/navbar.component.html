@@ -1,0 +1,60 @@
+<!--
+<header class="navbar fixed-top  sticky-top flex-md-nowrap p-0 shadow">
+  <div class="navbar col-md-3 col-lg-2 me-0 px-3"> Atlantique Business Intelligence </div>
+ <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <ul class="navbar-nav px-3">
+    <li class="nav-item ">
+      <button type="button" class="btn btn-light" (click)="deconnection()">Sign out</button>
+    </li>
+   </ul>
+</header>
+ -->
+
+
+ <nav style="background: #fff !important;box-shadow: 0px 1px 5px 1px #ccc;" class="navbar navbar-expand-lg navbar-light bg-light myMenu">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="row"style="margin-right: 5px;">
+    <div class="col-2">
+      <i class="fa fa-navicon ml-2" aria-hidden="true"></i>
+    </div>
+    <div class="col-10">
+      <a class="colormenuabi"> Administration </a>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="row" style="margin-right: 5px;">
+      <div class="col-12">
+        <a class="colormenuabi">Bienvenue {{nomProfil}}</a>
+      </div>
+    </div>
+    <div class="row" routerLinkActive="abiActive" style="margin-right: 5px;">
+      <div class="col-2">
+        <i class="bi bi-person-circle mr-2" aria-hidden="true"></i>
+      </div>
+      <div class="col-10" style="width: 50px;">
+         <a [routerLink]= "['/app/profil']"  class="colormenuabi">Profil</a>
+      </div>
+    </div>
+    <div class="row" routerLinkActive="abiActive">
+      <div class="col-2">
+        <i class="bi bi-box-arrow-left  ml-2" aria-hidden="true"></i>
+      </div>
+      <div class="col-10">
+        <a style="cursor: pointer;" (click)="logoutUser()" class="colormenuabi"> Deconnexion </a>
+      </div>
+    </div>
+
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>

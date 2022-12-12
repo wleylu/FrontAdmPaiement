@@ -1,0 +1,55 @@
+<!-- <app-accueil></app-accueil>
+    <div class="mt-5">
+        <router-outlet></router-outlet>
+    </div>
+ -->
+
+<div class="container-fluid">
+
+    <div class="row" style="width: 100%;margin-left: -19px;">
+        <div class="col-md-2">
+            <!--  contenu du sidebar  -->
+            <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+                <div class="nano">
+                    <div class="nano-content">
+
+                        <img style="width: 81%;margin-left: 11px;margin-top: 10px;" src="assets/abi.png">
+                        <!-- <app-sidebar></app-sidebar> -->
+                        <br> <br>
+                        <!--*ngIf="authService.isSuperadmin()"-->
+                        <!--
+                         *ngIf="authService.isAdmin()" -->
+
+                        <!-- &nbsp;&nbsp;   <div class="pd-6" style="width: 25px;">  <li class="label mb-3" style="margin-left: 10px;font-size: 18px;">Adminstration {{nom}}</li> </div> -->
+                        <ul>
+                            <!-- <li> <a  [routerLink]= "['/app/validation']" > Validation de Compte </a> </li> -->
+
+                            <li routerLinkActive="abiActive" class="pt-2 pb-2" *ngFor="let item of menuItems">
+                                <div class="row">
+                                    <div class="col-2" style="padding-left: 7%;">
+                                        <i class="{{item.icon}}" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <a [routerLink]="item.url" routerLinkActive="abiActive" class="colormenuabi"> {{item.titre}} </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- fin du contenu sidebar -->
+
+        </div>
+
+        <div class="col-md-10 pt-0">
+            <div class="row" style="width: 103%;margin-left: 0px;">
+                <div class="col-12 pt-0" style="margin-left: 0px;padding-right: 0px;padding-left: 0px;">
+                    <app-navbar></app-navbar>
+                </div>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>

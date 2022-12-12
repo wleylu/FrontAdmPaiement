@@ -1,0 +1,293 @@
+<p-toast [baseZIndex]="9999"></p-toast>
+<div class="container police" style="width: 101%;padding-right: 0px;">
+  <div class="row">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; LES COMMISSIONS  </li>
+          </ol>
+        </nav>
+  </div>
+  <div class="row">
+    <div class="col-md-1  mt-4"style="padding-top: 12px;">
+      <button style="background: #491e06;" (click)="clickAddCommission()" type="button"   data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button>
+    </div>
+    <div class="col-md-11" style="margin-top: 8px;">
+      <div class="row">
+        <form >
+          <div class="row">
+            <!-- <div class="col-md-1  mt-1"> -->
+              <!-- <button style="background: #491e06;"  type="button" (click)="clickAddcompteuser()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button> -->
+            <!-- </div> -->
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-5">
+                 <label for="facturier">Facturier</label>
+                  <select class="form-control" [(ngModel)]="facturier">
+                    <option value="" disabled>ALL</option>
+                    <option *ngFor="let facturier of facturierData"[ngValue]="facturier.facturier" [selected]="facturier.facturier">
+                      {{ facturier.facturier }}
+                    </option>
+                  </select>
+                </div>
+                <!-- <div class="col">
+                  <label for="facturier">Facturier</label>
+                  <select class="form-control" formControlName="facturier">
+                    <option></option>
+                    <option *ngFor="let facturier of facturierData"[ngValue]="facturier.facturier" [selected]="facturier.facturier">
+                      {{ facturier.facturier }}
+                    </option>
+                  </select>
+                </div> -->
+                <!-- <div class="col-md-5">
+                  <label for="libelle">Libelle</label>
+                  <input name="libelle"   formControlName="libelle" id="libelle" class="form-control search" type="text"  placeholder="Veuillez rechercher par libelle">
+                </div> -->
+                <div class="col-md-2">
+                  <button style="margin-top: 30px;" class="btn btn-outline-info abiButton" (click)="Search()" >Rechercher</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p-confirmDialog #cd [style]="{ width: '20vw' }">
+      <ng-template pTemplate="footer">
+        <button
+          type="button"
+          pButton
+          icon="pi pi-times"
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-secondary"
+        ></button>
+        <button
+          type="button"
+          pButton
+          icon="pi pi-check"
+          label="Oui"
+          (click)="cd.accept()"
+          class="p-button-warning"
+        ></button>
+      </ng-template>
+    </p-confirmDialog>
+    <table style="font-size: 14px" class="table table-hover table-striped table-bordered mt-2 ">
+      <thead>
+         <tr>
+            <!-- <th scope="col" > Id </th> -->
+            <th scope="col"> Facturier</th>
+            <th scope="col"> Montant </th>
+            <th scope="col"> Pourcentage Marchand</th>
+            <th scope="col"> Pourcentage Banque</th>
+            <th scope="col"> Commission Distributeur</th>
+            <th scope="col"> Commission Banque</th>
+            <th scope="col"> Timbre</th>
+            <th scope="col"> Libelle</th>
+            <th scope="col"> Actions</th>
+         </tr>
+      </thead>
+
+      <tbody >
+
+        <tr class="policerow" *ngFor= "let row of commissionData | paginate: {itemsPerPage:7,currentPage:p};">
+         <!--  <td>{{ row.id}}</td> -->
+          <td class="policerow">{{row.facturier}}</td>
+          <td class="policerow">{{row.montantCommission}}</td>
+          <td class="policerow">{{row.pourCommarch}}</td>
+          <td class="policerow">{{row.pourCombank}}</td>
+          <td class="policerow">{{row.commissionFacturier}}</td>
+          <td class="policerow">{{row.commissionBanque}}</td>
+          <td class="policerow">{{row.mntTimbre}}</td>
+          <td class="policerow">{{row.libelle}}</td>
+
+          <td class="policerow">
+            <button class="btn" (click)="onEdit(row)"  type="button"  data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-pencil-square-o" style="color: #ffc107;font-size: 20px;"  aria-hidden="true"></i>
+            </button>
+            <button  (click)="onEdite(row)" data-toggle="modal" data-target="#exampleModal" class="btn mx-0"><i style="color: #491e06;font-size: 20px;" class="fa fa-file-text" aria-hidden="true"></i></button>
+            <button  (click)="onDelete(row)"  class="btn mx-0"><i style="color: #e6390e;font-size: 20px;" class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <!-- <button  (click)="confirmDelate(content,row)"  class="btn btn-outline-danger mx-3"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+            <!--button  (click)="deletedcomptemarchant(row)"  class="btn btn-outline-danger mx-3">Deleted</button-->
+          </td>
+        </tr>
+
+      </tbody>
+
+      </table>
+  </div>
+  <pagination-controls (pageChange) = "p = $event"></pagination-controls>
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content" style="width: 140%;margin-left: -116px;">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel" style="
+                text-align: center;font-size: 20px;font-weight: bold; margin-left: 35%; color: #f2a54e;" *ngIf= "showAdd==1">Creation de la Commission</h3>
+                <h3 class="modal-title" id="exampleModalLabel" style="
+                text-align: center;font-size: 20px;font-weight: bold; margin-left: 35%; color: #f2a54e;" *ngIf= "showAdd==0">Modification de la Commission</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="formValue">
+                  <div class="row" style="height: 90px">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="facturier">Facturier</label>
+                        <select class="form-control" formControlName="facturier" [ngClass]="{'form-control': true, 'isWasValidated': isControle('facturier', 'required')}">
+                          <option></option>
+                          <option *ngFor="let facturier of facturierData"[ngValue]="facturier.facturier" [selected]="facturier.facturier">
+                            {{ facturier.facturier }}
+                          </option>
+                        </select>
+                        <div class="isError" style="color: #ee2808;" *ngIf="isControle('facturier', 'required')">
+                          Le champs est requis
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label  for="libelle">Libelle</label>
+                        <input type="text" [attr.disabled] ="isDisable ? '' : null"  id="libelle" class="form-control" name="libelle" formControlName="libelle"[ngClass]="{'form-control': true, 'isWasValidated': isControle('libelle', 'required')}">
+                        <div class="isError" style="color: #ee2808;" *ngIf="isControle('libelle', 'required')">
+                          Le champs est requis
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                  <!-- <div class="col-6">
+                    <div class="form-group">
+                      <label  for="libelle">Libelle</label>
+                      <input type="text" [attr.disabled] ="isDisable ? '' : null"  id="libelle" class="form-control" name="libelle" formControlName="libelle"[ngClass]="{'form-control': true, 'isWasValidated': isControle('commissionFacturier', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('commissionBanque', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="row" style="height: 90px">
+                  <div class="form-group col-6 dropdown">
+                    <label for="habilitation"> Roles</label>
+                    <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="habilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('habilitation', 'required')}">
+                      <option value="ROLE_USER_PERSO">PARTICULIER</option>
+                      <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
+                      <option value="ROLE_APPLICATION">APPLICATION</option>
+
+                    </select>
+                    <span class="isError" style="color: red;" *ngIf="isControle('habilitation', 'required')">
+                      Le champs est requis
+                    </span>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="montantCommission">Montant</label>
+                      <input type="number" onkeypress="return event.charCode >= 48"  [attr.disabled] ="isDisable ? '' : null"  id="montantCommission" name="montantCommission" formControlName="montantCommission" [ngClass]="{'form-control': true, 'isWasValidated': isControle('montantCommission', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('montantCommission', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                </div>
+
+                </div>
+                <div class="row" style="height: 90px">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="mntMin">Montant minimun</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="mntMin" class="form-control" name="mntMin" formControlName="mntMin"[ngClass]="{'form-control': true, 'isWasValidated': isControle('mntMin', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('mntMin', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="mntTimbre">Montant Maximum</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="mntMax" class="form-control" name="mntMax" formControlName="mntMax"[ngClass]="{'form-control': true, 'isWasValidated': isControle('mntMax', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('mntMax', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row" style="height: 90px">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="pourCommarch">Pourcentage Marchand</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null" onkeypress="return event.charCode >= 48" maxlength="2"  id="pourCommarch" name="pourCommarch" formControlName="pourCommarch"[ngClass]="{'form-control': true, 'isWasValidated': isControle('pourCommarch', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('pourCommarch', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="pourCombank">Pourcentage Banque</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="pourCombank" class="form-control" name="pourCombank" formControlName="pourCombank"[ngClass]="{'form-control': true, 'isWasValidated': isControle('pourCombank', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('pourCombank', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="height: 90px">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="commissionFacturier">Commission Distributeur</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="commissionFacturier" class="form-control" name="commissionFacturier" formControlName="commissionFacturier"[ngClass]="{'form-control': true, 'isWasValidated': isControle('commissionFacturier', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('commissionFacturier', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="commissionBanque">Commission Banque</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="commissionBanque" class="form-control" name="commissionBanque" formControlName="commissionBanque"[ngClass]="{'form-control': true, 'isWasValidated': isControle('commissionFacturier', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('commissionBanque', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="height: 90px">
+                  <!-- <div class="col-6">
+                    <div class="form-group">
+                      <label  for="libelle">Libelle</label>
+                      <input type="text" [attr.disabled] ="isDisable ? '' : null"  id="libelle" class="form-control" name="libelle" formControlName="libelle"[ngClass]="{'form-control': true, 'isWasValidated': isControle('libelle', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('libelle', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label  for="mntTimbre">Timbre</label>
+                      <input type="number" [attr.disabled] ="isDisable ? '' : null"  id="mntTimbre" class="form-control" name="mntTimbre" formControlName="mntTimbre"[ngClass]="{'form-control': true, 'isWasValidated': isControle('mntTimbre', 'required')}">
+                      <div class="isError" style="color: #ee2808;" *ngIf="isControle('mntTimbre', 'required')">
+                        Le champs est requis
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                </form>
+              </div>
+                 <div class="modal-footer">
+                   <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                   <button type="button" *ngIf= "showAdd==1" (click)="postCommission()" class="btn btn-warning">Ajouter</button>
+                    <button  type="button" *ngIf= "showAdd==0" (click)="updateCommission()" class="btn btn-warning"> Modifier </button>
+                </div>
+              </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "getClient":[
+    {
+    "client": "14244700",
+    "sexe": "FEMALE",
+    "nomPrenom": "BALLO KAMAHA SALIMATA",
+    "nom": "Melle BALLO KAMAHA SALIMATA",
+    "prenom": "",
+    "dateNais": "19921104",
+    "agec": "7000",
+    "tel": "22577655330",
+    "pieceId": "C0106146985",
+    "dateExpir": "20250309",
+    "dateDeLivr": "20150310",
+    "email": "ballosalima@gmail.com",
+    "comptes": [
+      {
+        "compte": "141447000019",
+        "agence": "141020013",
+        "ncg": "1001",
+        "libNcg": "CAV Particulier Locaux",
+        "coddci": "",
+        "expl": "CI.70993"
+      }
+    ]
+    }
+
+  ]
+}

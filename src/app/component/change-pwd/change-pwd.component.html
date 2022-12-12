@@ -1,0 +1,125 @@
+<!--
+
+  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5"><br>
+                    <br>
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="assets/newlogo.jpg" class="image"> </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5"> <br>
+
+                    <div class="row px-3 mb-4">  <br>
+                    </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Email Address</h6>
+                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Password</h6>
+                        </label> <input type="password" name="password" placeholder="Enter password">
+                    </div>
+                    <br>
+                     <div class="row px-3 mb-4">
+                  </div>
+                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center" (click)="authentification()" >Login</button> </div>
+                    <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small> </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-blue py-4">
+            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Atlantique busness international </small>
+                <div class="social-contact ml-4 ml-sm-auto">
+                    <span class="fa fa-facebook mr-4 text-sm"></span>
+                    <span class="fa fa-google-plus mr-4 text-sm"></span>
+                    <span class="fa fa-linkedin mr-4 text-sm"></span>
+                    <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/newlogo.jpg" id="icon" alt="User Icon" />
+      <h1>E-FACTURE</h1>
+    </div>
+    <div class=" alert alert-danger" *ngIf="erreur==1">
+        <strong> utilisateur ou mot de passe erronés...</strong>
+
+    </div>
+    <!-- Login Form -->
+    <form [formGroup]="firstConnexionForm"><!--
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+      <input type="password" id="password" class="fadeIn second" name="login" placeholder="password"> <br>
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)="authentification()"> -->
+      <!-- <div class="mb-3">
+          <div class="isError" style="color: #ee2808;" *ngIf="isControle('login', 'required')">
+            Le champs login est requis
+          </div>
+          <label> Login :</label><br>
+          <input type="text" name="login" class="form-control"  [attr.disabled] ="true" formControlName="login" [ngClass]="{'form-control': true, 'isWasValidated': isControle('login', 'required')}" >
+
+      </div> -->
+      <div class="md-5">
+          <div class="isError" style="color: #ee2808;" *ngIf="isControle('password','required')">
+            Le champs Mot de passe est requis
+          </div>
+
+          <label>  Mot de passe :</label>
+          <input type="password" name="password" class="form-control efactureconnexion" formControlName="password" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password', 'required')}"placeholder="Entrer le mot de passe envoyé par E-mail">
+      </div>
+      <div class="mb-3">
+        <div  style="color: #ee2808;" *ngIf="confirmErreur==2">
+          Le champs Nouveau Mot de passe est requis
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="messageMotPasseFort==1">
+          Au moins 8 Caractères
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="messageMotPasseFort==2">
+          Le mot de passe doit contenir au moins une lettre Majuscule
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="messageMotPasseFort==3">
+          Le mot de passe doit contenir au moins une lettre Miniscule
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="messageMotPasseFort==4">
+          Le mot de passe doit contenir au moins un chiffre
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="messageMotPasseFort==5">
+          Le mot de passe doit contenir au moins un caractère spécial
+        </div>
+        <div class="isError" style="color: #ee2808;" *ngIf="isControle('password1', 'required')">
+          Le champs Nouveau Mot de passe est requis
+        </div>
+        <label> Nouveau Mot de passe :</label>
+        <input type="password" name="password1" class="form-control efactureconnexion"(ngModelChange)="onControleValue($event)" formControlName="password1" [ngClass]="{'form-control': true, 'isWasValidated': isControle('password1', 'required')}" placeholder="Entrer le nouveau mot de passe">
+      </div>
+      <div class="mb-3">
+        <div class="isError" style="color: #ee2808;" *ngIf="isControle('confirmPassword', 'required')">
+          Le champs Confirmation de Mot de passe est requis
+        </div>
+        <div  style="color: #ee2808;" *ngIf="confirmErreur==1">
+          Mot de passe non identique veuillez saisir le bon mot de passe
+        </div>
+
+        <label> Confirmer Mot de passe :</label>
+        <input type="password" name="confirmPassword" class="form-control efactureconnexion" formControlName="confirmPassword"[ngClass]="{'form-control': true, 'isWasValidated': isControle('confirmPassword', 'required')}" placeholder="Confirmer le nouveau mot de passe">
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="onLoggedin()">
+    </form>
+
+    <!-- Remind Passowrd -->
+<!--       <div id="formFooter">
+      <a class="underlineHover" href="#">Go to the Site</a>
+    </div>
+ -->
+  </div>
+</div>
