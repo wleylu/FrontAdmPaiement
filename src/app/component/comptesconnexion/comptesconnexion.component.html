@@ -8,53 +8,32 @@
         </nav>
         <div class="container searchPaie">
             <form>
-                <div class="row" *ngIf="addButton">
+                <div class="row">
                     <div class="col-4" style="flex-grow: 0;">
                         <div class="row">
                             <div class="col" style="flex-grow: 0;">
                                 <!-- <button *ngIf="addButton"  style="background: #491e06;"  type="button" (click)="clickAddcomptemarchand()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+ Ajouter</button> -->
-                                <button style="margin-top: -3px !important;" type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-outline-primary mt-1 mb-3 formboutons" (click)="oninitForm()">
-                                <i class="fa fa-plus m-2" aria-hidden="true"></i>Ajouter</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <input [(ngModel)]="nom" name="nom" id="nom" class="form-control" type="text" placeholder="Veuillez rechercher par nom">
-                            </div>
-                            <div class="col">
-                                <input [(ngModel)]="loginn" name="loginn" id="loginn" class="form-control" type="text" placeholder="Recherche par référence de transaction">
-                            </div>
-                            <div class="col-1">
-                                <button class="btn btn-outline-info abiButton" (click)="Search()"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row" *ngIf="!addButton">
-                    <div class="col-4" style="flex-grow: 0;">
-                        <div class="row">
-                            <div class="col" style="flex-grow: 0;">
-                                <!-- <button *ngIf="addButton"  style="background: #491e06;"  type="button" (click)="clickAddcomptemarchand()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+ Ajouter</button> -->
-                                <button style="background:none;margin-top: -3px !important;color: #e68820 !important;border-color: #e68820 !important;width: 136% !important;cursor: auto !important;" type="button" class=" btn btn-primary mt-1 mb-3">
-                      <i class="fa fa-exchange" aria-hidden="true"></i> RECHERCHE
-                      </button>
+                                <button *ngIf="addButton" style="margin-top: -3px !important;" type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-outline-primary mt-1 mb-3 formboutons" (click)="oninitForm()">
+                                <i class="fa fa-plus m-2" aria-hidden="true"></i>Ajouter</button>
+
+                                <button *ngIf="!addButton" style="background:none;margin-top: -3px !important;color: #e68820 !important;border-color: #e68820 !important;width: 136% !important;cursor: auto !important;" type="button" class=" btn btn-primary mt-1 mb-3">
+                                  <i class="fa fa-exchange" aria-hidden="true"></i> RECHERCHE
+                                  </button>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col">
-                                <input [(ngModel)]="nom" name="nom" id="nom" class="form-control" type="text" placeholder="Veuillez rechercher par nom">
+                                <input [(ngModel)]="nom" name="nom" id="nom" class="form-control" (keyup.enter)="Search()" type="text" placeholder="Recherche référence Transaction">
                             </div>
                             <div class="col">
-                                <input [(ngModel)]="loginn" name="loginn" id="loginn" class="form-control" type="text" placeholder="Veuillez rechercher par login">
+                                <input [(ngModel)]="loginn" name="loginn" id="loginn" class="form-control" (keyup.enter)="Search()" type="text" placeholder="Recherche nom bénéficiaire">
                             </div>
-                            <div class="col-1">
+                            <!--  <div class="col-1">
                                 <button class="btn btn-outline-info abiButton" (click)="Search()"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -76,7 +55,7 @@
                             <th scope="col"> Téléphone</th>
                             <!-- <th scope="col">Contrat</th> -->
                             <!-- <th scope="col"> Statut</th> -->
-                            <th scope="col"> Action</th>
+                            <th *ngIf="addButton" scope="col"> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,8 +77,8 @@
                                     </span>
                                 <span style="cursor: default;" *ngIf="row.statut" class="btn mx-3"><i style="color: #12eb74;font-size: 15px;"  class="fa fa-check-square-o" aria-hidden="true"></i></span>
                             </td> -->
-                            <td>
-                                <button class="btn" (click)="onEdit(row)" type="button" data-toggle="modal" data-target="#modalModification"><i style="color: #ffc107;font-size: 20px;"
+                            <td *ngIf="addButton">
+                                <button class="btn" (click)="onEdit(row.id)" type="button" data-toggle="modal" data-target="#modalModification"><i style="color: #ffc107;font-size: 20px;"
                                 class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </button>
                                 <!-- <button class="btn" *ngIf="row.raisonSocial !=null"  (click)="onEdit(row)"  type="button"  data-toggle="modal" data-target="#modalModification" ><i style="color: #ffc107;font-size: 20px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -321,7 +300,7 @@
                          ----------------------------------------MODIFICATION MARCHAND-------------------------------------------------
                         --------------------------------------------------------------------------------------------------------------->
 
-                <div class="modal fade" id="modalModification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalModification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header modalHeader">
@@ -501,13 +480,14 @@
                             </div>
                             <div class="modal-footer modalFooter">
                                 <!-- <button type="button" *ngIf="showAdd" (click)="postComptemupdateComptemarchanddetailsarchanddetails()" class="btn  myBtnValider"> Ajouter </button> -->
-                                <button type="button" *ngIf="!showAdd" (click)="updateComptemarchanddetails()" [disabled]="!formValue.valid" class="btn  myBtnValider" (onClick)="save('success')"> Modifier </button>
+                                <button type="button" (click)="updateComptemarchanddetails()" [disabled]="!formValue.valid" class="btn  myBtnValider"> Modifier </button>
                                 <button type="button" id="cancel1" class="btn myBtnValider" data-dismiss="modal">Fermer</button>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
+                <!-- (onClick)="save('success')" -->
                 <!-------------------------------------------------------------------------------------------------------------
                          ------------------------------------------------------------------------------------------------------------------
                          ------------------------------------------------------------------------------------------------------------------

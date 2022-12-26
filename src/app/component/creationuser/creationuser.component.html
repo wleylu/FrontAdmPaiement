@@ -13,16 +13,11 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="row">
-                            <!-- <div class="col-6">
-                <button style="background: #491e06;" type="button" (click)="clickAddcompteuser()" data-toggle="modal"
-                  data-target="#exampleModal" class=" btn btn-primary">Ajouter Marchand</button>
-              </div> -->
+
                             <div class="col-6">
                                 <button type="button" (click)="clickAddback()" data-toggle="modal" data-target="#exampleModalBack" class="btn btn-outline-primary mt-1 mb-3 formboutons">
                                 <i class="fa fa-plus" aria-hidden="true"></i>Ajouter</button>
 
-                                <!-- <button type="button"  (click)="t()"
-                class="btn btn-warning">Envoyer</button> -->
                             </div>
                         </div>
                     </div>
@@ -100,24 +95,7 @@
                                 <button class="btn" (click)="onModifBackoffice(row)" type="button" data-toggle="modal" data-target="#exampleModalBack"><i
                 style="color: #ffc107;font-size: 20px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>
-                                <!--               <button class="btn" *ngIf="row.habilitation !='ROLE_USER_PERSO' && row.habilitation !='ROLE_USER_COM' && row.habilitation !='ROLE_PRESTATAIRE'" (click)="onModifBackoffice(row)" type="button" data-toggle="modal" data-target="#exampleModalBack"><i
-                  style="color: #ffc107;font-size: 20px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </button> -->
-                                <!--
-                                <button (click)="onEdite(row)" *ngIf="row.habilitation =='ROLE_USER_PERSO'" data-toggle="modal" data-target="#exampleModal" class="btn mx-3"><i class="fa fa-file-text"
-                  style="color: #491e06;font-size: 20px;" aria-hidden="true"></i></button>
- -->
-                                <!--                     <button (click)="onEdite(row)" *ngIf="row.habilitation =='ROLE_PRESTATAIRE'" data-toggle="modal" data-target="#exampleModal" class="btn mx-3"><i class="fa fa-file-text"
-                    style="color: #491e06;font-size: 20px;" aria-hidden="true"></i></button>
 
-                                <button (click)="onEdite(row)" *ngIf="row.habilitation =='ROLE_USER_COM'" data-toggle="modal" data-target="#exampleModal" class="btn mx-3"><i class="fa fa-file-text"
-                  style="color: #491e06;font-size: 20px;" aria-hidden="true"></i></button>
-
-                                <button (click)="onEditBackoffice(row)" *ngIf="row.habilitation !='ROLE_USER_PERSO' && row.habilitation !='ROLE_USER_COM'&& row.habilitation !='ROLE_PRESTATAIRE'" data-toggle="modal" data-target="#exampleModalBack" class="btn mx-3"><i class="fa fa-file-text"
-                  style="color: #491e06;font-size: 20px;" aria-hidden="true"></i></button>
-                    -->
-                                <!-- <button  (click)="confirmDelate(content,row)"  class="btn btn-outline-danger mx-3"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
-                                <!--button  (click)="deletedcomptemarchant(row)"  class="btn btn-outline-danger mx-3">Deleted</button-->
                             </td>
                         </tr>
 
@@ -146,16 +124,16 @@
                                     <div class="row">
 
                                         <div class="col-6" *ngIf="showAdd==1">
-                                            <label for="Client">Login</label>
-                                            <input type="text" id="client" name="client" formControlName="client" (ngModelChange)="searchclient($event)" [ngClass]="{'form-control': true, 'isWasValidated': isControle('client', 'required') || isControle('client', 'minlength')}">
+                                            <label for="Client">Login1 <span class="text text-danger">*</span></label>
+                                            <input type="text" id="client" name="client" formControlName="client">
                                             <div class="isError" style="color: red;" *ngIf="isControle('client', 'required')">
                                                 Le champs est requis
                                             </div>
 
                                         </div>
                                         <div class="col-6" *ngIf="showAdd==0">
-                                            <label for="Client">Login</label>
-                                            <input type="text" id="client" [attr.disabled]="true" name="client" formControlName="client" (ngModelChange)="searchclient($event)" [ngClass]="{'form-control': true, 'isWasValidated': isControle('client', 'required') || isControle('client', 'minlength')}">
+                                            <label for="client">Login<i class="text text-danger">*</i></label>
+                                            <input type="text" id="login" [attr.disabled]="true" name="client" formControlName="client" (ngModelChange)="searchclient($event)" [ngClass]="{'form-control': true, 'isWasValidated': isControle('client', 'required') || isControle('client', 'minlength')}">
                                             <div class="isError" style="color: red;" *ngIf="isControle('client', 'required')">
                                                 Le champs est requis
                                             </div>
@@ -163,38 +141,28 @@
                                         </div>
                                         <div class="col-6" *ngIf="showAdd==3">
                                             <label for="Client">Login</label>
-                                            <input type="text" id="client" [attr.disabled]="true" name="client" formControlName="client" (ngModelChange)="searchclient($event)" [ngClass]="{'form-control': true, 'isWasValidated': isControle('client', 'required') || isControle('client', 'minlength')}">
-                                            <span class="isError" style="color: red;" *ngIf="isControle('client', 'required')">
-                      Le champs est requis
-                    </span>
+                                            <input type="text" id="client" [attr.disabled]="true" name="client" formControlName="client">
 
                                         </div>
                                         <div class="form-group col-6 dropdown">
                                             <label for="habilitation"> Roles</label>
-                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="habilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('habilitation', 'required')}">
+                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="habilitation">
                       <option value="ROLE_USER_PERSO">PARTICULIER</option>
                       <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
 
                     </select>
-                                            <span class="isError" style="color: red;" *ngIf="isControle('habilitation', 'required')">
-                      Le champs est requis
-                    </span>
+
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="nom">Nom</label>
-                                            <input [attr.disabled]="isDisable ? '' : null" type="text" formControlName="nom" id="nom" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('nom', 'required')}">
-                                            <span class="isError" style="color: red;" *ngIf="isControle('nom', 'required')">
-                      Le champs est requis
-                    </span>
+                                            <input [attr.disabled]="isDisable ? '' : null" type="text" formControlName="nom" id="nom"> Le champs est requis
+
                                         </div>
                                         <div class="col-6">
                                             <label for="adCm">Adresse </label>
-                                            <input [attr.disabled]="isDisable ? '' : null" type="text" formControlName="adCm" id="adCm" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('adCm', 'required')}">
-                                            <span class="isError" style="color: red;" *ngIf="isControle('adCm', 'required')">
-                      Le champs est requis
-                    </span>
+                                            <input [attr.disabled]="isDisable ? '' : null" type="text" formControlName="adCm" id="adCm">
                                         </div>
                                         <!-- <div class="col-sm-4">
                     <label for="datecréation" > Date création </label>
@@ -206,16 +174,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="tel">Telephone </label><br>
-                                            <input [attr.disabled]="isDisable ? '' : null" style="width: 321px;" type="text" id="tel" formControlName="tel" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('tel', 'required')}">
-                                            <span class="isError" style="color: red;" *ngIf="isControle('tel', 'required')">
-                      Le champs est requis
-                    </span>
-                                            <div class="isError" style="color: red;" *ngIf="telExisteAjouterUser==0">
-                                                Ce contact existe déja
-                                            </div>
-                                            <div class="isError" style="color: red;" *ngIf="telExisteModificationUser==0">
-                                                Ce contact existe déja
-                                            </div>
+                                            <input [attr.disabled]="isDisable ? '' : null" style="width: 321px;" type="text" id="tel" formControlName="tel">
+
                                         </div>
 
                                         <!-- <div class="col-sm-2">
@@ -227,22 +187,14 @@
 
                                         <div class="col-6">
                                             <label for="Email">Email </label>
-                                            <input [attr.disabled]="isDisable ? '' : null" type="text" id="email" formControlName="email" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('email', 'required')}">
-                                            <span class="isError" style="color: red;" *ngIf="isControle('email', 'required')">
-                      Le champs est requis
-                    </span>
-                                            <div class="isError" style="color: red;" *ngIf="emailExisteAjouterUser==0">
-                                                Ce Mail existe déja
-                                            </div>
-                                            <div class="isError" style="color: red;" *ngIf="emailExisteModificationUser==0">
-                                                Ce Mail existe déja
-                                            </div>
+                                            <input [attr.disabled]="isDisable ? '' : null" type="text" id="email" formControlName="email">
+
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="plafond">Plafond</label>
-                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="selectPlafond" [ngClass]="{'form-control': true, 'isWasValidated': isControle('selectPlafond', 'required')}">
+                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="selectPlafond">
                       <option [ngValue]="null" disabled>Selectionner un plafond</option>
                       <option *ngFor="let plafond of plafondData" [ngValue]="plafond.typePlafond"
                         [selected]="plafond.typePlafond">
@@ -251,9 +203,7 @@
                         <span *ngIf="plafond.typePlafond==0">PARTICULIER</span>
                       </option>
                     </select>
-                                            <span class="isError" style="color: red;" *ngIf="isControle('selectPlafond', 'required')">
-                      Le champs est requis
-                    </span>
+
                                         </div>
 
                                         <!-- <div class="col-sm-2">
@@ -266,14 +216,12 @@
                                         <div class="col-6">
                                             <label for="typeComfirmation">Type Confirmation Paiement</label>
                                             <!-- <input type="text" id="typeComfirmation" formControlName="typeComfirmation" class="form-control"> -->
-                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="typeComfirmation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('typeComfirmation', 'required')}">
+                                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="typeComfirmation">
                       <option [ngValue]="null" disabled>Selectionner Le Type Confirmation Paiement</option>
                       <option *ngFor="let typeConf of listModes" [ngValue]="typeConf.type" [selected]="typeConf.type">
                         {{ typeConf.libelle }}
                       </option>
-                      <span class="isError" style="color: red;" *ngIf="isControle('typeComfirmation', 'required')">
-                        Le champs est requis
-                      </span>
+
                     </select>
                                         </div>
                                     </div>
@@ -363,33 +311,21 @@
                 <form [formGroup]="formValueBack">
                     <div class="row">
                         <div class="col form-group" *ngIf="disableModif==2">
-                            <label for="backlogin">Login</label>
-                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" name="backlogin" formControlName="backlogin" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backlogin', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                  Le champs est requis
-                </span>
-                            <div class="isError" style="color: red;" *ngIf="existeUserLogin==0">
-                                Ce login existe déja
-                            </div>
+                            <label for="backlogin">Login  <span class="text text-danger">*</span></label>
+                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" n ame="backlogin" formControlName="backlogin">
                         </div>
                         <div class="col form-group" *ngIf="disableModif==1">
                             <label for="backlogin">Login</label>
-                            <input type="text" id="backlogin" [attr.disabled]="true ? '' : null" class="form-control" name="backlogin" formControlName="backlogin" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backlogin', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                  Le champs est requis
-                </span>
+                            <input type="text" id="backlogin" [attr.disabled]="true ? '' : null" class="form-control" name="backlogin" formControlName="backlogin">
+
                         </div>
                         <div class="col form-group" *ngIf="disableModif==3">
                             <label for="backlogin">Login</label>
-                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" name="backlogin" formControlName="backlogin" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backlogin', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                  Le champs est requis
-                </span>
-
+                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" name="backlogin" formControlName="backlogin">
                         </div>
                         <div class="col" *ngIf="test" class="form-group col-6 dropdown">
-                            <label for="backhabilitation"> Roles</label>
-                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backhabilitation', 'required')}">
+                            <label for="backhabilitation"> Roles  <span class="text text-danger">*</span></label>
+                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation">
                 <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_USER_PERSO">CLIENT</option>
@@ -407,13 +343,11 @@
 
 
               </select>
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                Le champs est requis
-              </span>
+
                         </div>
                         <div class="col" *ngIf="showAddBackOffice === 1 " class="form-group col-6 dropdown">
-                            <label for="backhabilitation"> Roles</label>
-                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backhabilitation', 'required')}">
+                            <label for="backhabilitation"> Roles </label>
+                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation">
                 <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_USER_PERSO">CLIENT</option>
@@ -430,9 +364,7 @@
 
 
               </select>
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                Le champs est requis
-              </span>
+
                         </div>
                         <div class="col" *ngIf="showAddBackOffice === 3 " class="form-group col-6 dropdown">
                             <label for="backhabilitation"> Roles</label>
@@ -451,25 +383,19 @@
                 <option value="ROLE_APPLICATION">APPLICATION</option>
                 <option value="ROLE_USER">USER</option>
               </select>
-                            <span class="isError" style="color: red;" *ngIf="isControle('backlogin', 'required')">
-                Le champs est requis
-              </span>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label for="backnom">Nom</label>
-                            <input type="text" [attr.disabled]="isDisable ? '' : null" formControlName="backnom" id="backnom" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backnom', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backnom', 'required')">
-                  Le champs est requis
-                </span>
+                            <input type="text" [attr.disabled]="isDisable ? '' : null" formControlName="backnom" id="backnom" class="form-control">
+
                         </div>
                         <div class="col-6">
                             <label for="prenom">Prénom</label>
-                            <input type="text" formControlName="backprenom" id="backprenom" [attr.disabled]="isDisable ? '' : null" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backprenom', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backprenom', 'required')">
-                  Le champs est requis
-                </span>
+                            <input type="text" formControlName="backprenom" id="backprenom" [attr.disabled]="isDisable ? '' : null" class="form-control">
+
                         </div>
                         <!-- <div class="col-sm-4">
                     <label for="datecréation" > Date création </label>
@@ -480,17 +406,9 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label for="backtel">Téléphone</label><br>
-                            <input type="text" style="width: 321px;" id="phone" [attr.disabled]="isDisable ? '' : null" formControlName="backtel" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backtel', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backtel', 'required')">
-                  Le champs est requis
-                </span>
-                            <div class="isError" style="color: red;" *ngIf="telExisteAjouterUserBackOffice==0">
-                                Ce contact existe déja
-                            </div>
-                            <div class="isError" style="color: red;" *ngIf="telExisteModificationUserBackoffice==0">
-                                Ce contact existe déja
-                            </div>
+                            <label for="backtel">Téléphone  <span class="text text-danger">*</span></label><br>
+                            <input type="text" style="width: 321px;" id="phone" [attr.disabled]="isDisable ? '' : null" formControlName="backtel" class="form-control">
+
                         </div>
 
                         <!-- <div class="col-sm-2">
@@ -501,24 +419,16 @@
 
 
                         <div class="col-6">
-                            <label for="backEmail">Email </label>
-                            <input type="text" id="backemail" [attr.disabled]="isDisable ? '' : null" formControlName="backemail" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backemail', 'required')}">
-                            <span class="isError" style="color: red;" *ngIf="isControle('backemail', 'required')">
-                  Le champs est requis
-                </span>
-                            <div class="isError" style="color: red;" *ngIf="emailExisteAjouterUserBackOffice==0">
-                                Ce Mail existe déja
-                            </div>
-                            <div class="isError" style="color: red;" *ngIf="emailExisteModificationUserBackoffice==0">
-                                Ce Mail existe déja
-                            </div>
+                            <label for="backEmail">Email  <span class="text text-danger">*</span></label>
+                            <input type="text" id="backemail" [attr.disabled]="isDisable ? '' : null" formControlName="backemail" class="form-control">
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <label for="adCm">Adresse</label>
-                            <input type="text" formControlName="backadCm" id="backadCm" [attr.disabled]="isDisable ? '' : null" class="form-control" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backadCm', 'required')}">
+                            <input type="text" formControlName="backadCm" id="backadCm" [attr.disabled]="isDisable ? '' : null" class="form-control">
                             <span class="isError" style="color: red;" *ngIf="isControle('backadCm', 'required')">
                   Le champs est requis
                 </span>

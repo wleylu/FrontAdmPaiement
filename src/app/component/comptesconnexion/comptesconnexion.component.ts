@@ -31,6 +31,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { CommissionService } from 'src/app/services/commission.service';
 import { MessageStatut } from 'src/app/model/messageStatut.model';
 import { Agence } from 'src/app/model/agence.model';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-comptesconnexion',
@@ -161,7 +162,7 @@ export class ComptesconnexionComponent implements OnInit {
     this.initForm1();
     this.authService.infoUser(localStorage.getItem('authlogin')).subscribe(
       (res) => {
-        console.log(res);
+       // console.log(res);
         if (res) {
           this.UI = res;
           this.habb = res.habilitation;
@@ -177,19 +178,13 @@ export class ComptesconnexionComponent implements OnInit {
               queryParams: { returnUrl: this.router.routerState.snapshot.url },
             });
           } else {
-            this.initForm1();
-
-            this.initFormSearch();
-
-          //  this.getallComptemarchant();
-            this.getallCommission();
-            this.getallComptes();
             this.loginConnect = localStorage.getItem('authlogin');
             this.checkProfil();
             this.agence();
-            this.Search();
 
-            this.liens();
+           this.Search();
+
+           //this.liens();
           }
         }
       },
@@ -240,7 +235,7 @@ export class ComptesconnexionComponent implements OnInit {
     this.apii.getAgence().subscribe(
       (res) => {
         this.agences = res;
-        console.log(res);
+        //console.log(res);
       },
       (err) => {
         if (err.status != 401) {
@@ -299,6 +294,8 @@ export class ComptesconnexionComponent implements OnInit {
   }
 
   initForm1(): void {
+
+    this.initFormSearch();
     this.formValue = this.formbuilber.group({
       id: [''],
       client: [''],
@@ -312,9 +309,6 @@ export class ComptesconnexionComponent implements OnInit {
       dateNais: [''],
       comptemarchand: [''],
       regcrc: [''],
-      /* datecreation: [''],
-      adressecomptemarchand: [this.comptemarchandObj.adCm], */
-      /* numerocpt: [''], */
       raisonsocial: [''],
       agec: [''],
       sexe: [''],
@@ -334,7 +328,7 @@ export class ComptesconnexionComponent implements OnInit {
   }
 
   checkProfil() {
-    console.log(this.userhabilitation + typeof this.userhabilitation);
+    //console.log(this.userhabilitation + typeof this.userhabilitation);
     if (
       //this.userhabilitation == '"ROLE_SUPERVISEUR"' ||
       this.userhabilitation == '"ROLE_USER"' ||
@@ -363,7 +357,8 @@ export class ComptesconnexionComponent implements OnInit {
     this.showAdd = true;
     this.isDisable = false;
   }
-  onCommissionFilter(e:any){
+
+/*   onCommissionFilter(e:any){
 
       let com = e.value as Commission[];
       const distinctThings = com.filter(
@@ -383,7 +378,7 @@ export class ComptesconnexionComponent implements OnInit {
 
       });
 
-  }
+  } */
 
    /****************************************************************************************************************************
    *******************************************AJOUTER UN COMPTE MARCHAND****************************************************
@@ -408,6 +403,7 @@ export class ComptesconnexionComponent implements OnInit {
               summary: 'Succes',
               detail: this.messageRetour.libelle,
             });
+            this.comptemarchandObj.id=this.messageRetour.idMaj;
             this.comptemarchandData.push(this.comptemarchandObj);
             this.formValue.reset();
             break;
@@ -472,35 +468,13 @@ export class ComptesconnexionComponent implements OnInit {
       this.modifier = false;
     }
 
-    this.comptemarchandObj.nom = this.formValue.value.nom;
-    this.comptemarchandObj.prenom = this.formValue.value.prenom;
-    this.comptemarchandObj.login = this.formValue.value.client;
-    this.comptemarchandObj.client = this.formValue.value.refTransaction;;
-    this.comptemarchandObj.numCptContribuable =
-      this.formValue.value.numCptContribuable;
-    this.comptemarchandObj.dateNais = this.formValue.value.dateNais;
-    this.comptemarchandObj.tel = this.formValue.value.tel;
-    this.comptemarchandObj.numCpt = this.formValue.value.comptemarchand;
-    this.comptemarchandObj.regCrc = this.formValue.value.regcrc;
-    this.comptemarchandObj.adCm = this.formValue.value.adCm;
-    this.comptemarchandObj.numCpt = this.formValue.value.numerocpt;
-    this.comptemarchandObj.raisonSocial = this.formValue.value.raisonsocial;
-    this.comptemarchandObj.sexe = this.formValue.value.sexe;
-    this.comptemarchandObj.dateExpir = this.formValue.value.dateExpir;
-    this.comptemarchandObj.pieceId = this.formValue.value.pieceId;
-    this.comptemarchandObj.email = this.formValue.value.email;
-    this.comptemarchandObj.loginModification = this.loginConnect;
-    this.comptemarchandObj.loginAdd = this.loginConnect;
-    this.comptemarchandObj.montant = this.formValue.value.montant;
-    this.comptemarchandObj.agence= this.formValue.value.backagence;
+     this.comptemarchandObj.agence= this.formValue.value.backagence;
     this.comptemarchandObj.refTransaction= this.formValue.value.refTransaction;
     this.comptemarchandObj.codeTransaction=this.formValue.value.codeTransaction;
-
-
     this.comptemarchandObj.nom = this.formValue.value.nom;
     this.comptemarchandObj.prenom = this.formValue.value.prenom;
-    this.comptemarchandObj.login = this.formValue.value.client;
-    this.comptemarchandObj.client = this.formValue.value.client;
+    this.comptemarchandObj.login = this.formValue.value.refTransaction;
+    this.comptemarchandObj.client = this.formValue.value.refTransaction;
       this.formValue.value.numCptContribuable;
     this.comptemarchandObj.dateNais = this.formValue.value.dateNais;
     this.comptemarchandObj.tel = this.formValue.value.tel;
@@ -522,162 +496,7 @@ export class ComptesconnexionComponent implements OnInit {
 
   }
 
-  postComptemarchanddetails1() {
-  /*   const controls = this.formValue.controls;
-    if (this.formValue.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
-      return;
-    }
- */
-    console.log(this.formValue.value);
 
-    this.modifier = false;
-    this.comptemarchandObj.nom = this.formValue.value.nom;
-    this.comptemarchandObj.prenom = this.formValue.value.prenom;
-    this.comptemarchandObj.login = this.formValue.value.client;
-    this.comptemarchandObj.client = this.formValue.value.client;
-    this.comptemarchandObj.numCptContribuable =
-      this.formValue.value.numCptContribuable;
-    this.comptemarchandObj.dateNais = this.formValue.value.dateNais;
-    this.comptemarchandObj.tel = this.formValue.value.tel;
-    this.comptemarchandObj.numCpt = this.formValue.value.comptemarchand;
-    this.comptemarchandObj.regCrc = this.formValue.value.regcrc;
-    this.comptemarchandObj.adCm = this.formValue.value.adCm;
-    this.comptemarchandObj.numCpt = this.formValue.value.numerocpt;
-    this.comptemarchandObj.raisonSocial = this.formValue.value.raisonsocial;
-    this.comptemarchandObj.sexe = this.formValue.value.sexe;
-    this.comptemarchandObj.dateExpir = this.formValue.value.dateExpir;
-    this.comptemarchandObj.pieceId = this.formValue.value.pieceId;
-    this.comptemarchandObj.email = this.formValue.value.email;
-
-/*     this.comptemarchandObj.comptes = this.formValue.value.selectcomptesMarch;
-    if (this.formValue.value.selectcomptesMarch.length==0) {
-      this.comptemarchandObj.comptesInactif = this.listCompteClients;
-    }
-    this.comptemarchandObj.commission = this.formValue.value.selectCommission; */
-    this.comptemarchandObj.statut = 0;
-    this.comptemarchandObj.loginModification = this.loginConnect;
-    this.comptemarchandObj.loginAdd = this.loginConnect;
-    this.apii.getUserByMail(this.comptemarchandObj.email).subscribe((resp) => {
-
-      console.log(resp)
-      this.apii.getUserByTel(this.comptemarchandObj.tel).subscribe((tel)=>{
-        if (resp != null) {
-          this.emailExisteAjouterUser = 0;
-        } else if (tel != null) {
-          this.telExisteAjouterUser = 0;
-
-        } else {
-          this.api
-          .recherchebyEmail(this.comptemarchandObj.email)
-          .subscribe((resp) => {
-            /****************************************************VERIFICATION MAIL********************************************* */
-            this.api
-              .recherchebyTel(this.comptemarchandObj.tel)
-              .subscribe((respTel) => {
-                if (resp.email != null) {
-                  this.emailExisteAjouterMarchandPp = 0;
-                  this.telExisteAjouterMarchandPp = 1;
-                } else if (respTel.tel != null) {
-                  this.telExisteAjouterMarchandPp = 0;
-                  this.emailExisteAjouterMarchandPp = 1;
-                } else {
-                  this.emailExisteAjouterMarchandPp = 1;
-                  this.telExisteAjouterMarchandPp = 1;
-                  console.log(JSON.stringify(this.commissionObj) + 'ENREG')
-                  this.api.postComptemarchand(this.comptemarchandObj).subscribe(
-                    (res) => {
-                      console.log(JSON.stringify(res) + 'RETOUR ENREG')
-
-                      if (res) {
-                        this.comptemarchandObjAdd = res;
-                        console.log(this.comptemarchandObjAdd);
-                            if(this.comptemarchandObjAdd.client != null){
-                               this.messageService.add({
-                                  severity: 'success',
-                                  summary: 'Succes',
-                                  detail: 'Client enregistré avec succes',
-                                });
-                                this.formValue.reset();
-                            }
-                            else {
-                              this.messageService.add({
-                                severity: 'info',
-                                summary: 'Info',
-                                detail: 'Ce Client existe déja !',
-                              });
-                            }
-                      } else {
-                        this.messageService.add({
-                          severity: 'info',
-                          summary: 'Info',
-                          detail: 'Ce Client existe déja !',
-                        });
-                      }
-
-                      this.getallComptemarchant();
-                    },
-                    (err) => {
-                      if (err.status != 401) {
-                        this.erreur = this.formbuilber.group({
-                          httpStatusCode: err.status,
-                          methode: 'CmImpl.ajouterCm',
-                          login: localStorage.getItem('authlogin'),
-                          description: 'Erreur de Creation de marchands',
-                          message: err.message,
-                        });
-
-                        this.apiError
-                          .addErreurGenerer(this.erreur.value)
-                          .subscribe((data) => {});
-                      }
-
-                      this.autoLogoutService.autoLogout(err.status, this.router);
-                    }
-                  );
-                }
-              });
-          });
-      }
-    },
-    (err) => {
-      if (err.status != 401) {
-        this.erreur = this.formbuilber.group({
-          httpStatusCode: err.status,
-          methode: 'Ajouter Compte marchand',
-          login: localStorage.getItem('authlogin'),
-          description: 'Erreur de Verification du téléphone dans la liste des users',
-          message: err.message,
-        });
-
-        this.apiError
-          .addErreurGenerer(this.erreur.value)
-          .subscribe((data) => {});
-      }
-
-      this.autoLogoutService.autoLogout(err.status, this.router);
-    })
-    },
-    (err) => {
-      if (err.status != 401) {
-        this.erreur = this.formbuilber.group({
-          httpStatusCode: err.status,
-          methode: 'Ajouter Compte marchand',
-          login: localStorage.getItem('authlogin'),
-          description: 'Erreur de Verification de l\'adresse mail dans la liste des users',
-          message: err.message,
-        });
-
-        this.apiError
-          .addErreurGenerer(this.erreur.value)
-          .subscribe((data) => {});
-      }
-
-      this.autoLogoutService.autoLogout(err.status, this.router);
-    });
-  }
   /****************************************************************************************************************************
    *******************************************FIN AJOUT COMPTE MARCHAND****************************************************
    ****************************************************************************************************************************/
@@ -716,7 +535,7 @@ export class ComptesconnexionComponent implements OnInit {
   /****************************************************************************************************************************
   ***********************************************************ACTIVATION COMPTES***********************************************
   ****************************************************************************************************************************/
-  actif1(row: any) {
+ /*  actif1(row: any) {
     this.compteObj = row;
 
     this.compteObj.statut = 1;
@@ -749,7 +568,7 @@ export class ComptesconnexionComponent implements OnInit {
           this.autoLogoutService.autoLogout(err.status, this.router);
         }
       );
-  }
+  } */
   /****************************************************************************************************************************
   ***********************************************************FIN ACTIVATION COMPTES***********************************************
   ****************************************************************************************************************************/
@@ -830,141 +649,33 @@ export class ComptesconnexionComponent implements OnInit {
     });
   }
 
-  onEdit(row: any) {
-    console.log(row);
-    this.comptesMarch2=[];
-
+  onEdit(idBenef: number) {
+    let march: Comptemarchand= new Comptemarchand();
     this.showAdd = false;
-    this.comptemarchandObj.client = row.client;
-    this.comptemarchandObj = row;
-    this.formValue.controls['client'].setValue(row.client);
-    this.formValue.controls['nom'].setValue(row.nom);
-    this.formValue.controls['prenom'].setValue(row.prenom);
-    this.formValue.controls['email'].setValue(row.email);
-    this.formValue.controls['dateNais'].setValue(row.dateNais);
-    this.formValue.controls['tel'].setValue(row.tel);
-    this.formValue.controls['sexe'].setValue(row.sexe);
-    this.formValue.controls['pieceId'].setValue(row.pieceId);
-    this.formValue.controls['adCm'].setValue(row.adCm);
-    this.formValue.controls['agec'].setValue(row.agec);
-    this.formValue.controls['montant'].setValue(row.montant);
-    this.formValue.controls['refTransaction'].setValue(row.refTransaction);
-    this.formValue.controls['codeTransaction'].setValue(row.codeTransaction);
-   // this.formValue.controls['backagence'].setValue(row.agence.id);
+    this.apii.getMarchand(idBenef).subscribe({
+      next:(data:Comptemarchand) => {
+        march = data;
+        this.comptemarchandObj.id=idBenef;
+       this.formValue.controls['pieceId'].setValue(march.pieceId);
+      this.formValue.controls['montant'].setValue(march.montant);
+        this.formValue.controls['refTransaction'].setValue(march.refTransaction);
+        this.formValue.controls['codeTransaction'].setValue(march.codeTransaction);
+        if (march.agence== null) {this.formValue.controls['backagence'].setValue(march.agence);}
+          else{this.formValue.controls['backagence'].setValue(march.agence.id);}
+          this.formValue.controls['nom'].setValue(march.nom);
+          this.formValue.controls['prenom'].setValue(march.prenom);
+          this.formValue.controls['email'].setValue(march.email);
+          this.formValue.controls['tel'].setValue(march.tel);
 
-        if (row.agence== null) {this.formValue.controls['backagence'].setValue(row.agence);}
-          else{this.formValue.controls['backagence'].setValue(row.agence.id);}
-
-
-
-    console.log('this.commission22222222222222222');
-    console.log(row.commission);
-    console.log(this.comptesMarch2);
-    console.log('this.commission222222222222222222');
-    this.formValue.controls['selectCommission'].setValue(
-      row.commission
-    );
-    console.log('this.comptesMarch2');
-    console.log(row.comptes);
-    console.log(this.comptesMarch2);
-    console.log('this.comptesMarch2');
-    this.comptesMarch2=row.comptes
-    console.log('this.comptesMarch3');
-    console.log(this.comptesMarch2);
-    console.log('this.comptesMarch3');
-    //this.commissionObj = this.comptemarchandObj.commission;
-    console.log("this.comptemarchandObj");
-    console.log(this.formValue);
-    console.log(this.comptemarchandObj);
-    console.log("this.comptemarchandObj");
-    console.log(row);
-    //this.initForm();
-
-     //this.getComptes1(row.client);
-     console.log("this.comptemarchandObj999999999999");
-     //console.log(this.getComptes1(this.comptemarchandObj.client))
-     console.log("this.comptemarchandObj99999999999");
-
+      },
+      error:(err)=>{
+        console.log("Une erreur  s'est produite");
+      }
+    });
 
   }
 
-  onEdit12(row: any) {
-    console.log(row);
-    this.comptesMarch2=[];
-    this.api.getCommissionByClient(row.client).subscribe(res=>{
-      console.log("res------------------------------");
-      console.log(res);
-      console.log("res------------------------------");
 
-    row.commission=res;
-    console.log(row);
-    this.showAdd = false;
-    this.comptemarchandObj.client = row.client;
-    this.comptemarchandObj = row;
-    this.formValue.controls['client'].setValue(row.client);
-    this.formValue.controls['nom'].setValue(row.nom);
-    this.formValue.controls['prenom'].setValue(row.prenom);
-    this.formValue.controls['email'].setValue(row.email);
-    this.formValue.controls['dateNais'].setValue(row.dateNais);
-    this.formValue.controls['tel'].setValue(row.tel);
-    this.formValue.controls['sexe'].setValue(row.sexe);
-    this.formValue.controls['pieceId'].setValue(row.pieceId);
-    this.formValue.controls['adCm'].setValue(row.adCm);
-    this.formValue.controls['agec'].setValue(row.agec);
-    this.formValue.controls['montant'].setValue(row.montant);
-    this.formValue.controls['refTransaction'].setValue(row.refTransaction);
-    this.formValue.controls['codeTransaction'].setValue(row.codeTransaction);
- //   this.formValue.controls['backagence'].setValue(row.agence);
- //
-   this.formValue.controls['backagence'].setValue(row.agence.id);
-
-    this.formValue.controls['selectCommission'].setValue(
-      row.commission
-    );
-    console.log('this.comptesMarch2');
-    console.log(row.comptes);
-    console.log(this.comptesMarch2);
-    console.log('this.comptesMarch2');
-    this.comptesMarch2=row.comptes
-    console.log('this.comptesMarch3');
-    console.log(this.comptesMarch2);
-    console.log('this.comptesMarch3');
-    //this.commissionObj = this.comptemarchandObj.commission;
-    console.log("this.comptemarchandObj");
-    console.log(this.formValue);
-    console.log(this.comptemarchandObj);
-    console.log("this.comptemarchandObj");
-    console.log(row);
-    //this.initForm();
-
-     //this.getComptes1(row.client);
-     console.log("this.comptemarchandObj999999999999");
-     //console.log(this.getComptes1(this.comptemarchandObj.client))
-     console.log("this.comptemarchandObj99999999999");
-
-
-    /*
-
-        this.formValue.controls['nom'].setValue(row.nomCm);
-        this.formValue.controls['prenom'].setValue(row.prenomCm);
-        this.formValue.controls['login'].setValue(row.login);
-        this.formValue.controls['racine'].setValue(row.racineCm);
-        this.formValue.controls['tel1'].setValue(row.tel1Cm);
-        this.formValue.controls['tel2'].setValue(row.tel2Cm);
-        this.formValue.controls['tel3'].setValue(row.tel3Cm);
-        this.formValue.controls['comptemarchand'].setValue(row.numCptComCm);
-        this.formValue.controls['registredecommerce'].setValue(row.regCrcCm);
-        this.formValue.controls['adressecomptemarchand'].setValue(row.adCm);
-        this.formValue.controls['numerocpt'].setValue(row.numCptCm);
-        this.formValue.controls['raisonsocial'].setValue(row.intRs);
-       */
-      });
-  }
-
-  onEdit3(row: any) {
-    row = this.comptemarchandObj.client;
-    this.api.detailById(row).subscribe((res) => {});
-  }
 
   /*cette methode nous permet d'affiche le detail des comptes marchand et le reinitialiser après enregistrement*/
   /* choisir aussi le compte */
@@ -972,12 +683,15 @@ export class ComptesconnexionComponent implements OnInit {
   updateComptemarchanddetails(){
     this.isExistClient=false;
     this.formAjoutMarchand(1);
+    this.modifier = true;
+
+    //console.log("Le marchand en modification : "+JSON.stringify(this.comptemarchandObj));
+
+    //this.modifier = false;
 
     this.api.updateComptemarchand(this.comptemarchandObj).subscribe(
       (res) => {
         this.messageRetour = res;
-
-        console.log("Message retour :"+JSON.stringify(this.messageRetour));
 
         switch(this.messageRetour.codeMsg ){
           case "00":{
@@ -1054,158 +768,13 @@ export class ComptesconnexionComponent implements OnInit {
 
 
 
-  updateComptemarchanddetails1() {
-    const controls = this.formValue.controls;
-    if (this.formValue.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
-      return;
-    }
-
-    this.comptemarchandObj.nom = this.formValue.value.nom;
-    this.comptemarchandObj.prenom = this.formValue.value.prenom;
-    this.comptemarchandObj.login = this.formValue.value.client;
-    this.comptemarchandObj.client = this.formValue.value.client;
-    this.comptemarchandObj.numCptContribuable =
-      this.formValue.value.numCptContribuable;
-    this.comptemarchandObj.dateNais = this.formValue.value.dateNais;
-    this.comptemarchandObj.tel = this.formValue.value.tel;
-    this.comptemarchandObj.numCpt = this.formValue.value.comptemarchand;
-    this.comptemarchandObj.regCrc = this.formValue.value.regcrc;
-    this.comptemarchandObj.adCm = this.formValue.value.adCm;
-    this.comptemarchandObj.numCpt = this.formValue.value.numerocpt;
-    this.comptemarchandObj.raisonSocial = this.formValue.value.raisonsocial;
-    this.comptemarchandObj.sexe = this.formValue.value.sexe;
-    this.comptemarchandObj.dateExpir = this.formValue.value.dateExpir;
-    this.comptemarchandObj.pieceId = this.formValue.value.pieceId;
-    this.comptemarchandObj.email = this.formValue.value.email;
-    this.comptemarchandObj.commission = this.formValue.value.selectCommission;
-    //this.comptemarchandObj.commission = this.commissionObj1;
-    //this.comptemarchandObj.statut = 0;
-    this.comptemarchandObj.loginModification = this.loginConnect;
-    this.comptemarchandObj.loginAdd = this.loginConnect;
-    console.log("this.comptemarchandObj++++++++++++++++++++++++++++++++");
-    console.log(this.comptemarchandObj);
-    console.log("this.comptemarchandObj+++++++++++++++++++++++++++++++");
-    for (let i = 0; i < this.comptemarchandObj.comptes.length; i++) {
-      const element = this.comptemarchandObj.comptes[i];
-    }
-
-    this.api.detailById(this.comptemarchandObj.client).subscribe((result) => {
-      this.api
-        .recherchebyEmail(this.comptemarchandObj.email)
-        .subscribe((resp1) => {
-          this.api
-            .recherchebyTel(this.comptemarchandObj.tel)
-            .subscribe((respUpdateClient) => {
-              if (
-                resp1.email != null &&
-                resp1.client != this.comptemarchandObj.client &&
-                resp1.email == this.comptemarchandObj.email
-              ) {
-                this.emailExisteModificationMarchandPp = 0;
-                this.telExisteModificationMarchandPp = 1;
-              } else if (
-                respUpdateClient.tel != null &&
-                respUpdateClient.client != this.comptemarchandObj.client &&
-                respUpdateClient.tel == this.comptemarchandObj.tel
-              ) {
-                this.telExisteModificationMarchandPp = 0;
-                this.emailExisteModificationMarchandPp = 1;
-              } else {
-                this.emailExisteModificationMarchandPp = 1;
-                this.telExisteModificationMarchandPp = 1;
-                this.api.updateComptemarchand(this.comptemarchandObj).subscribe(
-                  (res) => {
-                    this.messageService.add({
-                      severity: 'success',
-                      summary: 'Succes',
-                      detail: 'Marchand modifié avec succes',
-                    });
-
-                    let ref = document.getElementById('cancel1');
-                    ref?.click();
-                    this.formValue.reset();
-                    this.getallComptemarchant();
-                  },
-                  (err) => {
-                    if (err.status != 401) {
-                      this.erreur = this.formbuilber.group({
-                        httpStatusCode: err.status,
-                        methode: 'CmImpl.modifierCm',
-                        login: localStorage.getItem('authlogin'),
-                        description: 'Erreur de modification du marchands',
-                        message: err.message,
-                      });
-
-                      this.apiError
-                        .addErreurGenerer(this.erreur.value)
-                        .subscribe((data) => {});
-                    }
-
-                    this.autoLogoutService.autoLogout(err.status, this.router);
-                  }
-                );
-              }
-            });
-        });
-    });
-  }
-
-  Comptemarchanddetail() {
-    const controls = this.formValue.controls;
-    if (this.formValue.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
-      return;
-    }
-
-    this.comptemarchandObj.nom = this.formValue.value.nom;
-    this.comptemarchandObj.prenom = this.formValue.value.prenom;
-    this.comptemarchandObj.login = this.formValue.value.client;
-    this.comptemarchandObj.client = this.formValue.value.client;
-    this.comptemarchandObj.numCptContribuable =
-      this.formValue.value.numCptContribuable;
-    this.comptemarchandObj.tel = this.formValue.value.tel2Cm;
-    this.comptemarchandObj.tel = this.formValue.value.tel;
-    this.comptemarchandObj.numCpt = this.formValue.value.comptemarchand;
-    this.comptemarchandObj.regCrc = this.formValue.value.regcrc;
-    this.comptemarchandObj.adCm = this.formValue.value.adCm;
-    this.comptemarchandObj.numCpt = this.formValue.value.numerocpt;
-    this.comptemarchandObj.raisonSocial = this.formValue.value.raisonsocial;
-    this.comptemarchandObj.sexe = this.formValue.value.sexe;
-    this.comptemarchandObj.dateExpir = this.formValue.value.dateExpir;
-    this.comptemarchandObj.pieceId = this.formValue.value.pieceId;
-    this.comptemarchandObj.email = this.formValue.value.email;
-
-    this.comptemarchandObj.comptes = this.formValue.value.selectcomptesMarch;
-    this.comptemarchandObj.commission = this.commissionObj1;
-    this.comptemarchandObj.statut = this.formValue.value.statut;
-    this.comptemarchandObj.loginModification = this.loginConnect;
-    this.comptemarchandObj.loginAdd = this.loginConnect;
-
-    this.api.updateComptemarchand(this.comptemarchandObj).subscribe(
-      (res) => {
-        //alert('modification avec succes');
-
-        let ref = document.getElementById('cancel');
-        ref?.click();
-        this.formValue.reset();
-        this.getallComptemarchant();
-      },
-      (err) => {
-        this.autoLogoutService.autoLogout(err.status, this.router);
-      }
-    );
-  }
   /*Pour faire la recherche dans un champs et appele la fonction a l'aide d'un clique*/
 
   Search() {
+
       this.api.getrecherchenomlogin(this.loginn,this.nom.toUpperCase(),this.loginConnect).subscribe(
         (data) => {
-          console.log("Machands liste : "+JSON.stringify(data));
+         // console.log("Machands liste : "+JSON.stringify(data));
           this.comptemarchandData = data;
         },
         (err) => {
@@ -1214,58 +783,6 @@ export class ComptesconnexionComponent implements OnInit {
       );
 
   }
-
-
-
-/*
-  Search1() {
-
-    //alert(this.loginn + '777' + this.nom )
-    if(this.loginn != null ||this.loginn != '' && this.nom != null || this.nom != ''){
-      this.api.getrecherchenomlogin(this.nom.toUpperCase(), this.loginn).subscribe(
-        (data) => {
-          this.comptemarchandData = data;
-        },
-        (err) => {
-          this.autoLogoutService.autoLogout(err.status, this.router);
-        }
-      );
-    }
-    else{
-      if(this.loginn == null || this.loginn == ''){
-        this.api.getrecherchenom(this.nom.toUpperCase()).subscribe(
-          (data) => {
-            this.comptemarchandData = data;
-          },
-          (err) => {
-            this.autoLogoutService.autoLogout(err.status, this.router);
-          }
-        );
-      }
-      if(this.nom == null || this.nom == ''){
-        this.api.getMachandByLogin(this.loginn).subscribe(
-          (data) => {
-            this.comptemarchand = data;
-          },
-          (err) => {
-            this.autoLogoutService.autoLogout(err.status, this.router);
-          }
-        );
-      }
-    }
-    let name  = this.nom;
-    //let nom = name.toUpperCase();
-    let login = this.loginn;
-    console.log(this.nom + this.loginn)
-    this.api.getrecherchenomlogin(this.nom.toUpperCase(),this.loginn,).subscribe(
-      (data) => {
-        this.comptemarchandData = data;
-      },
-      (err) => {
-        this.autoLogoutService.autoLogout(err.status, this.router);
-      }
-    );
-  } */
 
   disableTextbox = false;
 
@@ -1273,7 +790,6 @@ export class ComptesconnexionComponent implements OnInit {
     this.disableTextbox = !this.disableTextbox;
   }
 
-  Searchlogin(): void {}
 
   /*Confirmation de  supression*/
   confirmDelate(content: any, row: any) {
@@ -1300,71 +816,10 @@ export class ComptesconnexionComponent implements OnInit {
   cancelform() {
     this.ngOnInit();
   }
+
+
   /* rechercher le compte de façon automatique  */
-  searchCompte(client: string): any {
-    const controls = this.formValue.controls;
-    if (this.formValue.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
-      return;
-    }
 
-    if (this.formValue.value.client.length != 8) {
-      setTimeout(() => {
-        this.messError = 2;
-        this.abiMessage = 'Le champs doit contenir seulement 8 carateres';
-      }, 10000);
-    } else {
-      client = this.formValue.value.client;
-      this.api.detailById(client).subscribe((res) => {
-        console.log(JSON.stringify(res) + 'RACINE')
-        if (res.client != null) {
-          this.isExistClient = true;
-        } else {
-          this.isExistClient = false;
-          this.api.getsignalitique(client).subscribe((res: any) => {
-            console.log(JSON.stringify(res) + 'RACINES')
-
-            if (res.client != null && res.client == client) {
-              this.messError = 1;
-              this.isDisable = false;
-
-              this.comptemarchandObj = res;
-              this.listCompteClients= res.comptes;
-              var a = moment(res.dateNais, "YYYYMMDD")
-              this.comptemarchandObj.dateNais = a.format('DD/MM/YYYY')
-            //  alert(a);
-              //alert(this.comptemarchandObj.dateNais)
-              this.initForm();
-            } else {
-              this.messError = 3;
-              this.isInexistClient = false;
-              this.formValue.reset;
-            }
-          }),
-            (err: any) => {
-              if (err.status != 401) {
-                this.erreur = this.formbuilber.group({
-                  httpStatusCode: err.status,
-                  methode: 'API T24',
-                  login: localStorage.getItem('authlogin'),
-                  description: 'Erreur de recuperation du client',
-                  message: err.message,
-                });
-
-                this.apiError
-                  .addErreurGenerer(this.erreur.value)
-                  .subscribe((data) => {});
-              }
-              this.isInexistClient = true;
-
-              this.autoLogoutService.autoLogout(err.status, this.router);
-            };
-        }
-      });
-    }
-  }
   getColor(): string | any {
     if (this.comptemarchandObj.statut === 1) {
       return '#ffffff !important';
@@ -1382,37 +837,10 @@ export class ComptesconnexionComponent implements OnInit {
     this.client = document.getElementById('sexe');
     this.client.innerHTML = cmpt.sexe;
   }
-  /*--------------------------------------------DEBUT commission-------------------------------------------- */
-  getallCommission() {
-    this.api.listCommission().subscribe(
-      (res) => {
-        //this.commissionData = res;
-        this.selectcom= res;
-        if (this.selectcom.length === 0) {return; }
-        // for (const item of this.commissionData) {
-        //   this.selectcom.push({label:item.libelle, value: item.idCommission});
-        // }
-      },
-      (err) => {
-        this.erreur = this.formbuilber.group({
-          httpStatusCode: err.status,
-          methode: 'CommissionImpl.listCommissions',
-          login: localStorage.getItem('authlogin'),
-          description: 'Erreur de recuperation des commissions',
-          message: err.message,
-        });
 
-        this.apiError
-          .addErreurGenerer(this.erreur.value)
-          .subscribe((data) => {});
-
-        this.autoLogoutService.autoLogout(err.status, this.router);
-      }
-    );
-  }
   /*--------------------------------------------FIN commission-------------------------------------------- */
   /*--------------------------------------------DEBUT compte-------------------------------------------- */
-  getallComptes() {
+  /* getallComptes() {
     this.api.getComptes().subscribe(
       (res) => {
         this.comptesData = res;
@@ -1421,35 +849,9 @@ export class ComptesconnexionComponent implements OnInit {
         this.autoLogoutService.autoLogout(err.status, this.router);
       }
     );
-  }
+  } */
 
-  getComptes1(client: string) {
-    console.log('okokokokoko')
-    this.api.getMachandByRacine(client).subscribe((res: any) => {
-      this.comptemarchandObj1 = res;
-      console.log('INFO USER' + JSON.stringify(this.comptemarchandObj1))
-      console.log('okokokokoko5555555')
-      console.log(this.comptemarchandObj1)
-      console.log('okokokokoko5555555')
-      this.comptesMarch1 = this.comptemarchandObj1.comptes;
-      console.log('okokokokoko666666666666')
-      console.log(this.comptesMarch1)
-      console.log('okokokokoko66666666666')
-      this.comptesMarch2 = this.comptesMarch1;
-      console.log('okokokokoko77777777777777777777')
-      console.log(this.comptesMarch2)
-      console.log('okokokokoko77777777777777777777')
-    }),
-      (error: any) => {
-        this.isInexistClient = true;
 
-        this.autoLogoutService.autoLogout(error.status, this.router);
-      };
-  }
-
-  updateWorkout(event: any) {}
-  /*--------------------------------------------------------DEBUT compte------------------------------------------------------------- */
-  /**----------------------------------------------Ajouter Personne Moral------------------------------------------------------------ */
 
 
 }

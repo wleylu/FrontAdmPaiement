@@ -155,14 +155,14 @@ export class CreationmarchandComponent implements OnInit {
             summary: 'Succes',
             detail: 'Utilisateur enregistré avec succes',
           });
-          this.api.EnvoiMail(this.MailEnvoi.value).subscribe((data) => {
+        /*   this.api.EnvoiMail(this.MailEnvoi.value).subscribe((data) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Succes',
               detail: 'Mail de parametre de connexions envoyé avec succes',
             });
             this.formValueBack.reset();
-          });
+          }); */
         } else {
           this.messageService.add({
             severity: 'error',

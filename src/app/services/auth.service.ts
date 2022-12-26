@@ -53,8 +53,8 @@ export class AuthService {
           let tokenStr = 'Bearer ' + userData.token;
           localStorage.setItem('token', tokenStr);
 
-          console.log(userData + 'USER DATA');
-          console.log(tokenStr + 'TOKEN');
+          //console.log(userData + 'USER DATA');
+        //  console.log(tokenStr + 'TOKEN');
 
           return userData;
         })

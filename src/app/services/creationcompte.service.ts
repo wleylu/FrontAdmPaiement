@@ -40,6 +40,13 @@ public deletedCompteuser(id:number):Observable<void> {
       `${this.urlServeurApi}/cm/admin/marchand/${client}`
     );
   }
+
+  public getMarchand(idBenef: number): Observable<Comptemarchand> {
+    return this.http.get<Comptemarchand>(
+      `${this.urlServeurApi}/cm/admin/marchand/${idBenef}`
+    );
+  }
+
   public detailUser(login: string): Observable<User> {
     return this.http.get<User>(`${this.urlServeurApi}/detailUser/${login}`);
   }

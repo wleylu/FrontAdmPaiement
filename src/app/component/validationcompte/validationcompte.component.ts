@@ -220,7 +220,7 @@ export class ValidationcompteComponent implements OnInit {
   /*======================================== VALIDATIONS && STATUTS && BLOCAGE =============================================*/
   /*================================================= FONCTION VALIDATION ===================================================*/
 
-  onvalide5(clientUser: any) {
+ /*  onvalide5(clientUser: any) {
     clientUser = this.comptemarchandObj1.client;
     this.getUserLogin(clientUser);
     this.messageService.add({
@@ -234,8 +234,8 @@ export class ValidationcompteComponent implements OnInit {
     setTimeout(() => {
       location.reload();
     }, 3);
-  }
-  onvalide(clientUser: any) {
+  } */
+ /*  onvalide(clientUser: any) {
     clientUser = this.comptemarchandObj1.login;
 
     this.getUserLogin(clientUser);
@@ -251,8 +251,8 @@ export class ValidationcompteComponent implements OnInit {
     // setTimeout(() => {
     //   location.reload();
     // }, 0);
-  }
-  getUserLogin(login: string) {
+  } */
+  /* getUserLogin(login: string) {
     this.api.detailUser(login).subscribe((res) => {
       this.compteuserObj = res;
       this.compteuserObj.validation = 1;
@@ -372,7 +372,7 @@ export class ValidationcompteComponent implements OnInit {
       );
       this.ngOnInit();
     });
-  }
+  } */
 
 
 

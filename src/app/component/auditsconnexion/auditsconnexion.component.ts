@@ -49,7 +49,7 @@ export class AuditsconnexionComponent implements OnInit {
    // alert(num.slice(2,7))
     this.authService.infoUser(localStorage.getItem('authlogin')).subscribe(
       (res) => {
-        console.log(res);
+      //  console.log(res);
         if (res) {
           this.UI = res;
           this.habb = res.habilitation;

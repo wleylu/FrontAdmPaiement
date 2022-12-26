@@ -97,15 +97,15 @@ export class AuthentificationComponent implements OnInit {
       .subscribe((res: any) => {
         this.expiration = res[0].nbJours;
         this.adresseMail = res[0].mailEfacture;
-        console.log(res);
+        //console.log(res);
       });
   }
 
   onLoggedin() {
     localStorage.setItem('tentativeLogin', this.formValue.value.login);
-    console.log('okverification');
-    console.log(localStorage.getItem('tentativeLogin'));
-    console.log('okverification');
+    //console.log('okverification');
+    //console.log(localStorage.getItem('tentativeLogin'));
+    //console.log('okverification');
     this.authService
       .authentification(
         this.formValue.value.login,
@@ -113,13 +113,11 @@ export class AuthentificationComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          console.log(
-            this.formValue.value.login + this.formValue.value.password1
-          );
-          console.log(res);
+          //console.log(this.formValue.value.login + this.formValue.value.password1);
+          //console.log(res);
           localStorage.setItem('dwp', res.password);
           this.mdpDate = res.dateMdp;
-          console.log(this.mdpDate);
+          //console.log(this.mdpDate);
 
           var i = new Date(Date.now());
           var p: any = this.datePipe.transform(i, 'yyyy-MM-dd');
@@ -128,7 +126,7 @@ export class AuthentificationComponent implements OnInit {
           this.datef = new Date(p).getTime();
           this.nbj = (this.datef - this.dated) / 86400000;
 
-          console.log(this.nbj + 'vrai  ' + typeof this.nbj);
+          //console.log(this.nbj + 'vrai  ' + typeof this.nbj);
           localStorage.setItem('confirmation', this.formValue.value.password1);
 
           if (this.nbj >= this.expiration) {
@@ -167,9 +165,9 @@ export class AuthentificationComponent implements OnInit {
                     this.formValue.value.password1
                   );
                   localStorage.setItem('authisAuth1', JSON.stringify(res));
-                  console.log('testok6')
-                  console.log(localStorage.getItem('authisAuth1'));
-                  console.log('testok6')
+                  //console.log('testok6')
+                  //console.log(localStorage.getItem('authisAuth1'));
+                  //console.log('testok6')
                   localStorage.setItem(
                     'authbloquser',
                     JSON.stringify(res.bloquser)
@@ -188,12 +186,12 @@ export class AuthentificationComponent implements OnInit {
                     JSON.stringify(res.habilitation)
                   );
                   localStorage.setItem('authlogin', res.login);
-                  console.log('testok3')
-                  console.log(localStorage.getItem('authlogin'));
-                  console.log('testok3')
-                  console.log('testok4')
-                  console.log(localStorage.getItem('authlogin'));
-                  console.log('testok4')
+                  //console.log('testok3')
+                  //console.log(localStorage.getItem('authlogin'));
+                  //console.log('testok3')
+                  //console.log('testok4')
+                  //console.log(localStorage.getItem('authlogin'));
+                  //console.log('testok4')
                   if(res.agence != null){
                     localStorage.setItem('authagence', JSON.stringify(res.agence.id))
                   }
@@ -220,9 +218,9 @@ export class AuthentificationComponent implements OnInit {
                     'authvalidation',
                     JSON.stringify(res.validation)
                   );
-                  console.log('testok1')
-                  console.log(localStorage.getItem('authlogin'));
-                  console.log('testok1')
+                  //console.log('testok1')
+                  //console.log(localStorage.getItem('authlogin'));
+                  //console.log('testok1')
                   let body = { tentative: 0 };
                   this.httpClient
                     .put(
@@ -232,11 +230,11 @@ export class AuthentificationComponent implements OnInit {
                       body
                     )
                     .subscribe((res: any) => {
-                      console.log(JSON.stringify(res) + 'NEW');
+                      //console.log(JSON.stringify(res) + 'NEW');
                     });
-                    console.log('testok2')
-                    console.log(localStorage.getItem('authlogin'));
-                    console.log('testok2')
+                    //console.log('testok2')
+                    //console.log(localStorage.getItem('authlogin'));
+                    //console.log('testok2')
                   let body2 = { bloquser: 0 };
                   this.httpClient
                     .put(
@@ -246,7 +244,7 @@ export class AuthentificationComponent implements OnInit {
                       body2
                     )
                     .subscribe((res: any) => {
-                      console.log(JSON.stringify(res) + 'NEW2');
+                      //console.log(JSON.stringify(res) + 'NEW2');
                     });
                   this.router.navigate(['app/accueil']);
                   this.blockLogin = localStorage.getItem('authlogin');
@@ -269,12 +267,12 @@ export class AuthentificationComponent implements OnInit {
               this.router.navigate(['/authentication']);
             }
           }
-          console.log('testok')
-          console.log(localStorage.getItem('authlogin'));
-          console.log('testok')
+          //console.log('testok')
+          //console.log(localStorage.getItem('authlogin'));
+          //console.log('testok')
         },
         (err) => {
-          console.log(err.status)
+          //console.log(err.status)
           if (err.status = 500) {
             this.erreurs = this.formbuilber.group({
               httpStatusCode: err.status,
@@ -301,9 +299,9 @@ export class AuthentificationComponent implements OnInit {
             .addErreurGenerer(this.erreurs.value)
             .subscribe((data) => {});
           }
-          console.log('okverification1');
-          console.log(localStorage.getItem('authlogin'));
-          console.log('okverification1');
+          //console.log('okverification1');
+          //console.log(localStorage.getItem('authlogin'));
+          //console.log('okverification1');
           //localStorage.setItem('tentativeLogin', this.formValue.value.login);
           this.erreurAuth = 1;
           this.httpClient
@@ -323,7 +321,7 @@ export class AuthentificationComponent implements OnInit {
                     body
                   )
                   .subscribe((newUser: any) => {
-                    console.log(JSON.stringify(newUser) + 'NEW');
+                    //console.log(JSON.stringify(newUser) + 'NEW');
 
                     if (newUser.tentative == 5) {
                       this.erreurAuth = 2;
@@ -373,14 +371,14 @@ export class AuthentificationComponent implements OnInit {
             summary: 'Succes',
             detail: 'Utilisateur enregistré avec succes',
           });
-          this.api.EnvoiMail(this.MailEnvoi.value).subscribe((data) => {
+        /*   this.api.EnvoiMail(this.MailEnvoi.value).subscribe((data) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Succes',
               detail: 'Mail envoyé avec succes',
             });
             this.formValue.reset();
-          });
+          }); */
         } else {
           this.mailExist = 1;
           this.messageService.add({
