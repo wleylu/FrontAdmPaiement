@@ -6,6 +6,7 @@ import { Agence } from '../model/agence.model';
 import { Comptemarchand } from '../model/comptemarchand.model';
 import { Filiale } from '../model/filiale.model';
 import { Mail } from '../model/mail.model';
+import { MessageStatut } from '../model/messageStatut.model';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -75,6 +76,9 @@ public deletedCompteuser(id:number):Observable<void> {
     return this.http.get<any>(`${this.urlServeurApi}/user/utilisateur/liste`);
   }
 
+  public getAllUsersSearch(login:string,nom:string): Observable<User[]> {
+    return this.http.get<any>(`${this.urlServeurApi}/user/utilisateur/seach?login=${login}&nom=${nom}`);
+  }
 
 /*   public listeUserByProfilMarchand(agenceId : number,login: string): Observable<User[]> {
     return this.http.get<any>(
@@ -100,8 +104,8 @@ public deletedCompteuser(id:number):Observable<void> {
       `${this.urlServeurApi}/user/utilisateur/listeUserProfilBackOffice`
     );
   }
-  public postCompteuser(data: User): Observable<any> {
-    return this.http.post<any>(
+  public postCompteuser(data: User): Observable<MessageStatut> {
+    return this.http.post<MessageStatut>(
       `${this.urlServeurApi}/user/admin/utilisateur/ajouter`,
       data
     );
@@ -109,8 +113,8 @@ public deletedCompteuser(id:number):Observable<void> {
   public postRegister(data: User): Observable<any> {
     return this.http.post<any>(`${this.urlServeurApiuser}/user/register`, data);
   }
-  public updateCompteuser(data: User): Observable<User> {
-    return this.http.put<User>(
+  public updateCompteuser(data: User): Observable<MessageStatut> {
+    return this.http.put<MessageStatut>(
       `${this.urlServeurApi}/user/admin/utilisateur/modifier`,
       data
     );

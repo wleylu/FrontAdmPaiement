@@ -1,150 +1,111 @@
 <div class="container police" style="width: 101%;padding-right: 0px;">
-    <div class="row"style="width: 100%;">
+    <div class="row" style="width: 100%;">
         <nav aria-label="breadcrumb" class="enteteMain">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active enteteMainLi text-xl text-light" aria-current="page">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; CONSULTATION DES TRANSACTIONS </li>
             </ol>
         </nav>
 
-    <div class="container searchPaie">
-        <p-toast></p-toast>
-        <form>
-            <div class="row">
-                <!-- <div class="col-md-1  mt-1"> -->
-                <!-- <button style="background: #491e06;"  type="button" (click)="clickAddcompteuser()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button> -->
-                <!-- </div> -->
-                <div class="col-md-12" style="padding-left: 134px;">
-                    <div class="row">
-                        <div class="col">
-                            <label for="firstDate">Date Début</label>
-                            <input name="firstDate" [(ngModel)]="firstDate" id="firstDate" class="form-control search" type="date" placeholder="Veuillez rechercher par firstDate">
-                            <div class="isError" style="color: red;" *ngIf="remplir === 1">
-                                Le champs est requis
+        <div class="container searchPaie">
+            <p-toast></p-toast>
+            <form [formGroup]="formRechercheConsultation">
+
+                <div class="row">
+                    <!-- <div class="col-md-1  mt-1"> -->
+                    <!-- <button style="background: #491e06;"  type="button" (click)="clickAddcompteuser()" data-toggle="modal" data-target="#exampleModal"class=" btn btn-primary mt-1 mb-3">+</button> -->
+                    <!-- </div> -->
+                    <div class="col p-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="login">Login</label>
+                                <input name="login" (keyup.enter)="getConsultations()" formControlName="login" id="login" class="form-control search" type="text">
                             </div>
-                        </div>
-                        <div class="col" style="margin-left: 30px;">
-                            <label for="lastDate">Date Fin</label>
-                            <input name="lastDate" [(ngModel)]="lastDate" id="lastDate" class="form-control search" type="date" placeholder="Veuillez rechercher par lastDate">
-                            <div class="isError" style="color: red;" *ngIf="remplir === 1">
-                                Le champs est requis
+
+                            <div class="col">
+                                <label for="refTransaction">Ref. transaction</label>
+                                <input name="refTransaction" (keyup.enter)="getConsultations()" formControlName="refTransaction" id="refTransaction" class="form-control" type="text">
                             </div>
-                        </div>
-                        <div class="col">
-                            <label for="login">Login</label>
-                            <input name="login" [(ngModel)]="login" id="login" class="form-control search" type="text" placeholder="Veuillez rechercher par login">
+
+                            <div class="col">
+                                <label for="codeTransaction">Code transaction</label>
+                                <input name="codeTransaction" (keyup.enter)="getConsultations()" formControlName="codeTransaction" id="codeTransaction" class="form-control search" type="text">
+                            </div>
+
+
+                            <div class="col-md-3 mt-2">
+                                <label for="codeVille">Ville</label>
+                                <select class="form-control" (ngModelChange)="getConsultations()" formControlName="codeVille">
+                            <option [ngValue]="0" selected="true"></option>
+                            <option *ngFor="let agence of agences; let i=index" [ngValue]="agence.id">
+                                {{ agence.libelle }}
+                             </option>
+
+                            </select>
+                            </div>
+
+                            <div class="col">
+                                <label for="firstDate">Date Début</label>
+                                <input name="firstDate" (ngModelChange)="getConsultations()" formControlName="firstDate" id="firstDate" class="form-control search" type="date" placeholder="Veuillez rechercher par firstDate">
+
+                            </div>
+                            <div class="col" style="margin-left: 30px;">
+                                <label for="lastDate">Date Fin</label>
+                                <input name="lastDate" (ngModelChange)="getConsultations()" formControlName="lastDate" id="lastDate" class="form-control search" type="date" placeholder="Veuillez rechercher par lastDate">
+
+                            </div>
+
+
+                            <div class="col-md-1 mt-4">
+                                <!--   <button class="btn btn-outline-info abiButton mt-2" (click)="exportAsXLSX()"
+                                style="background: none;"><i class="fa fa-file-excel-o" style="font-size:20px;color:green"></i></button>
+ -->
+                                <!--  <button class="btn btn-outline-info abiButton mt-2" style="background: none;"><i class="fa fa-file-excel-o"
+                                   style="font-size:20px;color:green"></i></button> -->
+                            </div>
+
                         </div>
 
-                        <div class="col" style=" margin-left: 30px;padding-top: 38px;">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="row" style="margin-top: -16px;">
-                                        <div class="col-6">
-                                            <button class="btn btn-outline-info abiButton" (click)="Search()"><i class="fa fa-search" style="font-size:20px;color:#ffd54f;"></i></button>
-                                        </div>
-                                        <div class="col-6">
-                                            <button class="btn btn-outline-info abiButton" (click)="exportAsXLSX()" style="background: none;"><i class="fa fa-file-excel-o" style="font-size:20px;color:green"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- <button  class="btn btn-outline-info abiButton"  (click)="Search('login','referenceFt','facturier','identifiant')" >Rechercher</button> -->
-                                </div>
-                                <div class="col-6">
-                                    <!-- <button (click)="exportAsXLSX()" style="border: none;background: none;"><i class="fa fa-file-excel-o" style="font-size:28px;color:green"></i></button> -->
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="referenceFt">Reference FT</label>
-                            <input name="referenceFt" [(ngModel)]="referenceFt" id="referenceFt" class="form-control search" type="text" placeholder="Veuillez rechercher par referenceFt">
-                        </div>
-                        <!-- <div class="col" >
-              <input name="facturier"   formControlName="facturier" id="facturier"  class="form-control search" type="text"  placeholder="Veuillez rechercher par facturier">
-            </div> -->
-                        <div class="col">
-                            <label for="facturier">Facturier</label>
-                            <select class="form-control" [(ngModel)]="facturier">
-                <option></option>
-                <option *ngFor="let facturier of facturierData"[ngValue]="facturier.facturier" [selected]="facturier.facturier">
-                  {{ facturier.facturier }}
-                </option>
-              </select>
-                        </div>
-                        <div class="col">
-                            <label for="identifiant">Identifiant</label>
-                            <input name="identifiant" [(ngModel)]="identifiant" id="identifiant" class="form-control search" type="text" placeholder="Veuillez rechercher par identifiant">
-                        </div>
-                        <div class="col" style="padding-top: 39px;">
-                            <button class="btn myBtnValiderAN" (click)="annuler()" style="width: 45%;margin-left: 18px;">Annuler</button>
-                        </div>
+                </div>
+            </form>
+        </div>
+        <div class="card shadow m-1 mt-1">
+            <div class="card-body">
+                <table style="font-size: 14px" class="table table-hover table-striped table-bordered mt-2 ">
+                    <thead>
+                        <tr class="tableHeader">
+                            <!-- <th scope="col" > Id </th> -->
+                            <th scope="col"> Date de Règlement </th>
+                            <th scope="col"> Ref Transaction </th>
+                            <th scope="col"> Code trnsaction</th>
+                            <th scope="col"> Montant</th>
+                            <th scope="col"> Nom</th>
+                            <th scope="col"> code confirmation</th>
+                            <th scope="col"> Login</th>
+                        </tr>
+                    </thead>
 
-                    </div>
-                    <!-- <div class="row">
-            <div class="col-md-4">
-              <input name="identifiant"   formControlName="identifiant" id="identifiant" class="form-control search" type="text"  placeholder="Veuillez rechercher par identifiant">
-            </div>
-            <div class="col-md-4">
-              <input name="firstDate"   formControlName="firstDate" id="firstDate" class="form-control search" type="date"  placeholder="Veuillez rechercher par firstDate">
-            </div>
-            <div class="col-md-4">
-              <input name="lastDate"   formControlName="lastDate" id="lastDate" class="form-control search" type="date"  placeholder="Veuillez rechercher par lastDate">
-            </div>
-          </div> -->
-                    <!-- <div class="row">
-            <div class="col-md-10">
+                    <tbody>
 
-            </div>
-            <div class="col-md-2">
-              <button  class="btn btn-outline-info ml-8 abiButton" (click)="Search('login','referenceFt','facturier','identifiant')" >Rechercher</button>
-            </div>
-          </div> -->
+                        <tr class="policerow" *ngFor="let row of listTransactions | paginate: {itemsPerPage:7,currentPage:p};">
+                            <!--  <td>{{ row.id}}</td> -->
+                            <td class="policerow">{{ row.dateModification}}</td>
+                            <td class="policerow">{{ row.refTransaction}}</td>
+                            <td class="policerow">{{ row.codeTransaction}}</td>
+                            <td class="policerow">{{ row.montant}}</td>
+                            <td class="policerow">{{ row.nom+' '+row.prenom}}</td>
+                            <td class="policerow">{{ row.codeConfirmation}}</td>
+                            <td class="policerow">{{ row.loginModification}}</td>
 
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="tablePaginate">
+                    <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
-        </form>
-    </div>
-      <div class="card shadow m-1 mt-1">
-        <div class="card-body">
-          <table style="font-size: 14px" class="table table-hover table-striped table-bordered mt-2 ">
-            <thead>
-                <tr class="tableHeader">
-                    <!-- <th scope="col" > Id </th> -->
-                    <th scope="col"> Date de Règlement </th>
-                    <th scope="col"> Reference </th>
-                    <th scope="col"> Reference FT</th>
-                    <th scope="col"> Montant Debite</th>
-                    <th scope="col"> Numero de compte</th>
-                    <th scope="col"> Type de Reglement</th>
-                    <th scope="col"> Facturier</th>
-                    <th scope="col"> Login</th>
-                    <th scope="col"> Identifiant</th>
-                    <th scope="col">Date d'expiration</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr class="policerow" *ngFor="let row of consultationData | paginate: {itemsPerPage:7,currentPage:p};">
-                    <!--  <td>{{ row.id}}</td> -->
-                    <td class="policerow">{{ row.dateRegle}}</td>
-                    <td class="policerow">{{ row.reference}}</td>
-                    <td class="policerow">{{ row.referenceFT}}</td>
-                    <td class="policerow">{{ row.montantDebite}}</td>
-                    <td class="policerow">{{ row.numCpt}}</td>
-                    <td class="policerow">{{ row.typeRegle}}</td>
-                    <td class="policerow">{{ row.facturier}}</td>
-                    <td class="policerow">{{ row.login}}</td>
-                    <td class="policerow">{{ row.identifiant}}</td>
-                    <td class="policerow">{{ row.dtExpFacture}}</td>
-                </tr>
-
-            </tbody>
-        </table>
-        <div class="tablePaginate">
-            <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
         </div>
-        </div>
-      </div>
     </div>
 </div>

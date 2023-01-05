@@ -59,7 +59,7 @@ export class CreationmarchandComponent implements OnInit {
         this.lienMessageMailBack = res[0].lienPremClient;
         this.lienMessageMailMarchand = res[0].lienPremAdmin;
         this.adresseMail = res[0].mailEfacture;
-        console.log(res);
+     //   console.log(res);
       });
   }
   initFormBack(): void {
@@ -109,6 +109,8 @@ export class CreationmarchandComponent implements OnInit {
     this.showAdd = 3;
     this.disableModif = 2;
   }
+
+
   ajoutBackoffice() {
     this.backObj.nom = this.formValueBack.value.backnom;
     this.backObj.prenom = this.formValueBack.value.backprenom;
@@ -123,7 +125,7 @@ export class CreationmarchandComponent implements OnInit {
 
     this.api.postCompteuser(this.backObj).subscribe(
       (res) => {
-        this.backObj1 = res;
+       // this.backObj1 = res;
         this.formValueBack.reset();
 
         this.MailEnvoi = this.formbuilber.group({
@@ -149,7 +151,7 @@ export class CreationmarchandComponent implements OnInit {
             '\n',
         });
 
-        if (res.login != null) {
+        if (res.codeMsg != null) {
           this.messageService.add({
             severity: 'success',
             summary: 'Succes',

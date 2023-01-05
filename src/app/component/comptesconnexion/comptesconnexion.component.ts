@@ -403,7 +403,7 @@ export class ComptesconnexionComponent implements OnInit {
               summary: 'Succes',
               detail: this.messageRetour.libelle,
             });
-            this.comptemarchandObj.id=this.messageRetour.idMaj;
+            this.comptemarchandObj.id=+this.messageRetour.idMaj;
             this.comptemarchandData.push(this.comptemarchandObj);
             this.formValue.reset();
             break;

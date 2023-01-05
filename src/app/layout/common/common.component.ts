@@ -40,12 +40,12 @@ export class CommonComponent implements OnInit {
         //   url: '/app/validationBackOffice',
         //   submenu: [],
         // },
-        {
+        /* {
           titre: 'Audits',
           icon: 'fa fa-eye',
           url: '/app/auditconnexion',
           submenu: [],
-        },
+        }, */
        /*  {
           titre: 'Erreurs',
           icon: 'fa fa-bug',
@@ -65,12 +65,12 @@ export class CommonComponent implements OnInit {
           url: '/app/Consultation',
           submenu: [],
         },
-        {
+      /*   {
           titre: 'Réclamations',
           icon: 'fa fa-commenting',
           url: '/app/reclamations',
           submenu: [],
-        },
+        }, */
       ];
     }
     if (this.prod === 'ROLE_AUDIT') {

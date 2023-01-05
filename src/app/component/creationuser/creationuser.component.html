@@ -16,24 +16,25 @@
 
                             <div class="col-6">
                                 <button type="button" (click)="clickAddback()" data-toggle="modal" data-target="#exampleModalBack" class="btn btn-outline-primary mt-1 mb-3 formboutons">
-                                <i class="fa fa-plus" aria-hidden="true"></i>Ajouter</button>
+                                <i class="fa fa-plus mt-1" aria-hidden="true"></i>Ajouter</button>
 
                             </div>
                         </div>
                     </div>
                     <div class="col-9">
-                        <div class="row">
-                            <div class="col-5">
-                                <input [(ngModel)]="nom" name="nom" id="nom" class="form-control" type="text" placeholder="Veuillez rechercher par nom">
+                        <form [formGroup]="formRechercheUser">
+                            <div class="row">
+                                <div class="col-5">
+                                    <input formControlName="insertuser" name="insertuser" (keyup.enter)="getAllUsersSearch()" id="insertuser" class="form-control" type="text" placeholder="Veuillez rechercher par nom">
+                                </div>
+                                <div class="col-5">
+                                    <input formControlName="searchLoginuser" (keyup.enter)="getAllUsersSearch()" name="searchLoginuser" id="searchLoginuser" class="form-control" type="text" placeholder="Veuillez rechercher par login">
+                                </div>
+
                             </div>
-                            <div class="col-5">
-                                <input [(ngModel)]="loginn" name="loginn" id="loginn" class="form-control" type="text" placeholder="Veuillez rechercher par login">
-                            </div>
-                            <div class="col">
-                                <button class="btn myBtnValiderAN" (click)="Search()">Rechercher</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+
                 </div>
             </form>
         </div>
@@ -92,7 +93,7 @@
  -->
 
 
-                                <button class="btn" (click)="onModifBackoffice(row)" type="button" data-toggle="modal" data-target="#exampleModalBack"><i
+                                <button class="btn" (click)="onModifBackoffice(row.login)" type="button" data-toggle="modal" data-target="#exampleModalBack"><i
                 style="color: #ffc107;font-size: 20px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>
 
@@ -312,8 +313,15 @@
                     <div class="row">
                         <div class="col form-group" *ngIf="disableModif==2">
                             <label for="backlogin">Login  <span class="text text-danger">*</span></label>
-                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" n ame="backlogin" formControlName="backlogin">
+                            <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" name="backlogin" formControlName="backlogin">
+                            <span *ngIf="formValueBack.controls['backlogin'].touched
+                            &&formValueBack.controls['backlogin'].errors
+                            && formValueBack.controls['backlogin'].errors!['required']" class="text text-danger">
+                            Le login est obligatoire
+                            </span>
+                            <span *ngIf="msgRetour.codeMsg==='11'" class="text text-danger">{{ msgRetour.libelle }}</span>
                         </div>
+
                         <div class="col form-group" *ngIf="disableModif==1">
                             <label for="backlogin">Login</label>
                             <input type="text" id="backlogin" [attr.disabled]="true ? '' : null" class="form-control" name="backlogin" formControlName="backlogin">
@@ -323,52 +331,68 @@
                             <label for="backlogin">Login</label>
                             <input type="text" id="backlogin" [attr.disabled]="isDisable ? '' : null" class="form-control" name="backlogin" formControlName="backlogin">
                         </div>
-                        <div class="col" *ngIf="test" class="form-group col-6 dropdown">
+                        <div class="col" *ngIf="showAddBackOffice===0 && showAddBackOfficeAd  === 0" class="form-group col-6 dropdown">
                             <label for="backhabilitation"> Roles  <span class="text text-danger">*</span></label>
                             <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation">
-                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
-                <option value="ROLE_ADMIN">ADMIN</option>
-                <option value="ROLE_USER_PERSO">CLIENT</option>
-                <option value="ROLE_AUDIT">AUDITEUR</option>
-                <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
-                <option value="ROLE_HELPDESK">BACK OFFICE</option>
-                <option value="ROLE_MONETIQUE">MONETIQUE</option>
-                <option value="ROLE_COMPTABILITE">COMPTABILITE</option>
-                <option value="ROLE_SUPPORT">SUPPORT</option>
-                <option value="ROLE_SUPERVISEUR">SUPERVISEUR</option>
-                <!-- <option value="ROLE_PRESTATAIRE">PRESTATAIRE</option> -->
-                <option value="ROLE_APPLICATION">APPLICATION</option>
-                <option value="ROLE_USER">USER</option>
-
-
-
-              </select>
-
+                                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                                <option value="ROLE_USER_PERSO">CLIENT</option>
+                                <option value="ROLE_AUDIT">AUDITEUR</option>
+                                <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
+                                <option value="ROLE_HELPDESK">BACK OFFICE</option>
+                                <option value="ROLE_MONETIQUE">MONETIQUE</option>
+                                <option value="ROLE_COMPTABILITE">COMPTABILITE</option>
+                                <option value="ROLE_SUPPORT">SUPPORT</option>
+                                <option value="ROLE_SUPERVISEUR">SUPERVISEUR</option>
+                                <!-- <option value="ROLE_PRESTATAIRE">PRESTATAIRE</option> -->
+                                <option value="ROLE_APPLICATION">APPLICATION</option>
+                                <option value="ROLE_USER">USER</option>
+                              </select>
                         </div>
+
+                        <div class="col" *ngIf="showAddBackOffice===0 && showAddBackOfficeAd  === 1" class="form-group col-6 dropdown">
+                            <label for="backhabilitation"> Roles  <span class="text text-danger">*</span></label>
+                            <select [attr.disabled]="true" class="form-control" formControlName="backhabilitation">
+                              <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                              <option value="ROLE_ADMIN">ADMIN</option>
+                              <option value="ROLE_USER_PERSO">CLIENT</option>
+                              <option value="ROLE_AUDIT">AUDITEUR</option>
+                              <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
+                              <option value="ROLE_HELPDESK">BACK OFFICE</option>
+                              <option value="ROLE_MONETIQUE">MONETIQUE</option>
+                              <option value="ROLE_COMPTABILITE">COMPTABILITE</option>
+                              <option value="ROLE_SUPPORT">SUPPORT</option>
+                              <option value="ROLE_SUPERVISEUR">SUPERVISEUR</option>
+                              <!-- <option value="ROLE_PRESTATAIRE">PRESTATAIRE</option> -->
+                              <option value="ROLE_APPLICATION">APPLICATION</option>
+                              <option value="ROLE_USER">USER</option>
+                            </select>
+                        </div>
+
                         <div class="col" *ngIf="showAddBackOffice === 1 " class="form-group col-6 dropdown">
-                            <label for="backhabilitation"> Roles </label>
+                            <label for="backhabilitation"> Roles  <span class="text text-danger">*</span> </label>
                             <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation">
-                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
-                <option value="ROLE_ADMIN">ADMIN</option>
-                <option value="ROLE_USER_PERSO">CLIENT</option>
-                <option value="ROLE_AUDIT">AUDITEUR</option>
-                <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
-                <option value="ROLE_HELPDESK">BACK OFFICE</option>
-                <option value="ROLE_MONETIQUE">MONETIQUE</option>
-                <option value="ROLE_COMPTABILITE">COMPTABILITE</option>
-                <option value="ROLE_SUPPORT">SUPPORT</option>
-                <option value="ROLE_SUPERVISEUR">SUPERVISEUR</option>
-                <!-- <option value="ROLE_PRESTATAIRE">PRESTATAIRE</option> -->
-                <option value="ROLE_APPLICATION">APPLICATION</option>
-                <option value="ROLE_USER">USER</option>
+                              <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                              <option value="ROLE_ADMIN">ADMIN</option>
+                              <option value="ROLE_USER_PERSO">CLIENT</option>
+                              <option value="ROLE_AUDIT">AUDITEUR</option>
+                              <option value="ROLE_USER_COM">DISTRIBUTEUR</option>
+                              <option value="ROLE_HELPDESK">BACK OFFICE</option>
+                              <option value="ROLE_MONETIQUE">MONETIQUE</option>
+                              <option value="ROLE_COMPTABILITE">COMPTABILITE</option>
+                              <option value="ROLE_SUPPORT">SUPPORT</option>
+                              <option value="ROLE_SUPERVISEUR">SUPERVISEUR</option>
+                              <!-- <option value="ROLE_PRESTATAIRE">PRESTATAIRE</option> -->
+                              <option value="ROLE_APPLICATION">APPLICATION</option>
+                              <option value="ROLE_USER">USER</option>
 
-
-              </select>
+                        </select>
+                            <span *ngIf="msgRetour.codeMsg==='21'" class="text text-danger">{{ msgRetour.libelle }}</span>
 
                         </div>
-                        <div class="col" *ngIf="showAddBackOffice === 3 " class="form-group col-6 dropdown">
+                        <div class="col" *ngIf="showAddBackOffice === 3" class="form-group col-6 dropdown">
                             <label for="backhabilitation"> Roles</label>
-                            <select [attr.disabled]="isDisable ? '' : null" class="form-control" formControlName="backhabilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backhabilitation', 'required')}">
+                            <select [attr.disabled]="true" class="form-control" formControlName="backhabilitation" [ngClass]="{'form-control': true, 'isWasValidated': isControle('backhabilitation', 'required')}">
                 <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_USER_PERSO">CLIENT</option>
@@ -409,6 +433,13 @@
                             <label for="backtel">Téléphone  <span class="text text-danger">*</span></label><br>
                             <input type="text" style="width: 321px;" id="phone" [attr.disabled]="isDisable ? '' : null" formControlName="backtel" class="form-control">
 
+                            <span *ngIf="formValueBack.controls['backtel'].touched
+                             &&formValueBack.controls['backtel'].errors
+                             && formValueBack.controls['backtel'].errors!['required']" class="text text-danger">
+                             Le contact est obligatoire
+                             </span>
+                            <span *ngIf="msgRetour.codeMsg==='05'" class="text text-danger">{{ msgRetour.libelle }}</span>
+
                         </div>
 
                         <!-- <div class="col-sm-2">
@@ -421,6 +452,13 @@
                         <div class="col-6">
                             <label for="backEmail">Email  <span class="text text-danger">*</span></label>
                             <input type="text" id="backemail" [attr.disabled]="isDisable ? '' : null" formControlName="backemail" class="form-control">
+
+                            <span *ngIf="formValueBack.controls['backtel'].touched
+                            &&formValueBack.controls['backtel'].errors
+                            && formValueBack.controls['backtel'].errors!['required']" class="text text-danger">
+                            Le contact est obligatoire
+                            </span>
+                            <span *ngIf="msgRetour.codeMsg==='06'" class="text text-danger">{{ msgRetour.libelle }}</span>
 
                         </div>
                     </div>
@@ -488,8 +526,8 @@
                 </form>
             </div>
             <div class="modal-footer modalFooter">
-                <button type="button" *ngIf="showAddBackOffice==1" (click)="ajoutBackoffice()" class="btn myBtnValider">Valider</button>
-                <button type="button" *ngIf="showAddBackOffice==0" (click)="updateCompteBackdetails()" class="btn myBtnValider">Modifier</button>
+                <button type="button" *ngIf="showAddBackOffice==1" [disabled]="!formValueBack.valid" (click)="ajoutBackoffice()" class="btn myBtnValider">Valider</button>
+                <button type="button" *ngIf="showAddBackOffice==0" [disabled]="!formValueBack.valid" (click)="updateCompteBackdetails()" class="btn myBtnValider">Modifier</button>
                 <button type="button" (click)="onCancel()" id="cancel1" class="btn myBtnValider" data-dismiss="modal">Fermer</button>
 
 

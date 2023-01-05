@@ -3,11 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Agence } from 'src/app/model/agence.model';
 import { Commission } from 'src/app/model/commission.model';
+import { Comptemarchand } from 'src/app/model/comptemarchand.model';
 import { Facturier } from 'src/app/model/facturier';
+import { Marchand } from 'src/app/model/marchand.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AutoLogoutService } from 'src/app/services/auto-logout.service';
 import { ConsultationsServiceService } from 'src/app/services/consultations-service.service';
+import { CreationcompteService } from 'src/app/services/creationcompte.service';
 import { ErreurGenererService } from 'src/app/services/erreur-generer.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { FacturierService } from 'src/app/services/facturier.service';
@@ -23,14 +27,19 @@ import { CommissionService } from '../../services/commission.service';
 export class ConsultationsComponent implements OnInit {
   formRechercheConsultation!: FormGroup;
   consultationData: any;
+  listTransactions! :Marchand[];
   p: number = 1;
   erreur!: FormGroup;
   isDisable!: boolean;
   isDisable1!: boolean;
   facturierData!: Facturier[];
-
+  agences!: Agence[];
   firstDate! : Date;
   lastDate! : Date;
+
+  firstDate1: string="";
+  lastDate1: string="";
+
   login= ''
   identifiant= ''
   referenceFt= ''
@@ -49,14 +58,16 @@ export class ConsultationsComponent implements OnInit {
     private excelService: ExcelService,
     private router: Router,
     public authService: AuthService,
+    private compteCreation: CreationcompteService,
     public autoLogoutService: AutoLogoutService,
     private facturierService: FacturierService
   ) {}
 
   ngOnInit() {
+    this.formRechercheConsultations();
     this.authService.infoUser(localStorage.getItem('authlogin')).subscribe(
       (res) => {
-        console.log(res);
+       // console.log(res);
         if (res) {
           this.UI = res;
           this.habb = res.habilitation;
@@ -77,8 +88,7 @@ export class ConsultationsComponent implements OnInit {
             });
           } else {
             this.getConsultations();
-            this.formRechercheConsultations();
-            this.listFacture();
+            this.agence();
           }
         }
       },
@@ -90,28 +100,35 @@ export class ConsultationsComponent implements OnInit {
       }
     );
   }
-  formRechercheConsultations(): void {
+
+
+  formRechercheConsultations() {
     this.formRechercheConsultation = this.formbuilber.group({
       login: [''],
-      referenceFt: [''],
-      facturier: [''],
-      identifiant: [''],
+      refTransaction: [''],
+      codeVille: [''],
+      codeTransaction: [''],
       firstDate: [''],
       lastDate: [''],
     });
   }
-  listFacture() {
-    this.facturierService.getFacturier().subscribe(
+
+
+
+
+  agence() {
+    this.compteCreation.getAgence().subscribe(
       (res) => {
-        this.facturierData = res;
+        this.agences = res;
+        //console.log(res);
       },
       (err) => {
         if (err.status != 401) {
           this.erreur = this.formbuilber.group({
             httpStatusCode: err.status,
-            methode: 'facturier.liste',
+            methode: 'agence.liste',
             login: localStorage.getItem('authlogin'),
-            description: 'Erreur de consultation des Facturier',
+            description: 'Erreur de consultation des agences',
             message: err.message,
           });
 
@@ -124,10 +141,20 @@ export class ConsultationsComponent implements OnInit {
       }
     );
   }
+
+
   getConsultations() {
-    this.api.getConsultation().subscribe(
+
+     this.api.getAllTransaction(this.formRechercheConsultation.value.login,
+      this.formRechercheConsultation.value.refTransaction,
+      this.formRechercheConsultation.value.codeTransaction,
+      this.formRechercheConsultation.value.firstDate,
+      this.formRechercheConsultation.value.lastDate,
+      this.formRechercheConsultation.value.codeVille
+    ).subscribe(
       (res) => {
-        this.consultationData = res;
+        this.listTransactions = res;
+
       },
       (err) => {
         if (err.status != 401) {
@@ -149,83 +176,12 @@ export class ConsultationsComponent implements OnInit {
     );
   }
 
-  Search(){
-    if(this.firstDate == null || this.lastDate == null){
-      this.remplir = 1;
-    }else{
-      this.remplir = 0;
-    }
 
 
-    this.api
-      .getrechercheConsultation(
-        this.firstDate,
-        this.lastDate,
-        this.login,
-        this.referenceFt,
-        this.facturier,
-        this.identifiant
-      )
-      .subscribe(
-        (data) => {
-          this.consultationData = data;
-        },
-        (err) => {
-          if (
-            this.login != null &&
-            this.referenceFt != null &&
-            this.facturier != null &&
-            this.identifiant != null
-          ) {
-            this.api
-              .recherche(this.login, this.referenceFt, this.facturier, this.identifiant)
-              .subscribe((resp) => {
-                this.consultationData = resp;
-              });
-          } else {
-            this.getConsultations();
-          }
-
-          if (err.status != 401) {
-            this.erreur = this.formbuilber.group({
-              httpStatusCode: err.status,
-              methode: 'ConsultationImpl.vueConsultation',
-              login: localStorage.getItem('authlogin'),
-              description: 'Erreur de consultation des Resultats de recherche',
-              message: err.message,
-            });
-
-            this.apiError
-              .addErreurGenerer(this.erreur.value)
-              .subscribe((data) => {});
-          }
-
-          this.autoLogoutService.autoLogout(err.status, this.router);
-        }
-      );
-  }
-  SearchUser1(firstDate: string, lastDate: string): void {
-    firstDate = this.formRechercheConsultation.value.firstDate;
-    lastDate = this.formRechercheConsultation.value.lastDate;
-
-    this.api.rechercheByDateBetween(firstDate, lastDate).subscribe(
-      (data) => {
-        this.consultationData = data;
-        this.isDisable = true;
-      },
-      (err) => {
-        this.autoLogoutService.autoLogout(err.status, this.router);
-      }
-    );
-  }
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.consultationData, 'Consultation');
   }
-  annuler() {
-    this.formRechercheConsultation.reset;
 
-    location.reload();
-  }
   block() {
     this.isDisable = true;
   }

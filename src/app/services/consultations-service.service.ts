@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Comptemarchand } from '../model/comptemarchand.model';
 import { Consultation } from '../model/consultation';
+import { Marchand } from '../model/marchand.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +35,16 @@ export class ConsultationsServiceService implements OnInit {
       return recherche;
     }
   }
+
+  public getAllTransaction(login: string,refTran: string,
+    codeTran: string,
+    dateDebut: string,
+    dateFin: string,
+    agence: string):Observable<Marchand[]>{
+ return this.http.get<Marchand[]>(`${this.urlServeurApi}/cm/admin/listransacback?loginAdd=${login}&refTran=${refTran}&codeTran=${codeTran}&dateDebut=${dateDebut}&dateFin=${dateFin}&agence=${agence}`);
+}
+
+
 
   public recherche(
     login: string,
